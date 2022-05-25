@@ -5,11 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.Data;
 
 @Data
 @Entity
+@Table(name="address")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +22,8 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private Store store;
 
+    @OneToOne(mappedBy = "address")
+    private Purchase purchase;
 
     public Address(String road, String city, String country, String zipcode) {
         this.road = road;
