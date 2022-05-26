@@ -9,6 +9,7 @@ const SideNav = () => {
         <Nav defaultActiveKey="/" className="flex-column side-nav bg-primary w-100 h-100">
             <Nav.Item><Link to="/">Dashboard</Link></Nav.Item>
             <Nav.Item><Link to="/deliveries">Deliveries</Link></Nav.Item>
+            <Nav.Item><Link to="/couriers">Couriers</Link></Nav.Item>
         </Nav>
     );
 };

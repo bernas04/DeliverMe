@@ -6,6 +6,8 @@ import App from './App';
 import Dashboard from './pages/Dashboard';
 import Deliveries from './pages/Deliveries';
 import DeliveryDetails from './pages/DeliveryDetails';
+import Couriers from './pages/Couriers';
+import CourierDetails from './pages/CourierDetails';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +17,8 @@ root.render(
         <Route index element={<Dashboard />} />
         <Route path='deliveries' element={<Deliveries />} />
         <Route path='deliveries/:deliveryId' element={<DeliveryDetails />} />
+        <Route path='couriers' element={<Couriers />} />
+        <Route path='couriers/:courierId' element={<CourierDetails />} />
       </Route>
     </Routes>
   </BrowserRouter>

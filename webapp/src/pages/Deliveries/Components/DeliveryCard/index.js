@@ -27,7 +27,7 @@ const DeliveryCard = ({deliveryDetails}) => {
             <Card.Body className="row">
                 <Col xs="10">
                     <Card.Title>{deliveryDetails.name}</Card.Title>
-                    <Card.Text>
+                    <div className="card-text">
                         <Row>
                             <Col xs="3">
                                 Status: <span className={"badge " + statusBadgeClass}>{deliveryDetails.status}</span>
@@ -39,7 +39,7 @@ const DeliveryCard = ({deliveryDetails}) => {
                                 Business: {deliveryDetails.business}
                             </Col>
                         </Row>
-                    </Card.Text>
+                    </div>
                 </Col>
                 <Col xs="2" className="d-flex flex-column justify-content-center">
                     <Link className="view-item-btn ms-auto" to={"/deliveries/" + deliveryDetails.id}>View</Link>
