@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Row, Col } from 'react-bootstrap';
+import { FiEye } from 'react-icons/fi';
 
 const DeliveryCard = ({deliveryDetails}) => {
 
@@ -42,7 +43,7 @@ const DeliveryCard = ({deliveryDetails}) => {
                     </div>
                 </Col>
                 <Col xs="2" className="d-flex flex-column justify-content-center">
-                    <Link className="view-item-btn ms-auto" to={"/deliveries/" + deliveryDetails.id}>View</Link>
+                    <Link className="view-item-btn ms-auto" to={"/deliveries/" + deliveryDetails.id}><FiEye size="2rem" /></Link>
                 </Col>
             </Card.Body>
             

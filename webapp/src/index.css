@@ -11,9 +11,8 @@ html, body, #root {
     text-decoration: none;
     border: solid 1px var(--bs-primary);
     border-radius: 50%;
+    padding: 0.3rem;
     display: inline-block;
-    width: 2.5rem;
-    height: 2.5rem;
 }
 
 .view-item-btn:hover {

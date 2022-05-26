@@ -1,5 +1,6 @@
-import React from "react";
-import { Container } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Container, Form } from "react-bootstrap";
+import CheckboxGroup from "../../components/CheckboxGroup";
 import DeliveryCard from './Components/DeliveryCard'
 
 const Deliveries = () => {
@@ -29,12 +30,27 @@ const Deliveries = () => {
     ]
 
 
+    const possibleStates = ["requested", "in progress", "delivered", "canceled"];
+    const [selectedStates, setSelectedStates] = useState(possibleStates.map(s=>s));
+
+    useEffect(()=>{
+        console.log(selectedStates);
+    }, [selectedStates])
+
+
     return(
         <Container>
             <h2 className="my-2">Deliveries</h2>
 
+            <br />
+            <Form.Group>
+                <Form.Control type="text" placeholder="Search by delivery name or ID" />
+            </Form.Group>
+            <Form.Group>
+                <Form.Control type="text" placeholder="Search by courier name or ID" />
+            </Form.Group>
 
-
+            <CheckboxGroup values={possibleStates} selectedValues={selectedStates} setSelectedValues={setSelectedStates} />
 
             {
                 testItems.map(item => <DeliveryCard key={item.id} deliveryDetails={item} />)
