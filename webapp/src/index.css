@@ -1,0 +1,22 @@
+html, body, #root {
+    height: 100%;
+}
+
+#root {
+    overflow-x: hidden;
+}
+
+.view-item-btn {
+    color: var(--bs-primary);
+    text-decoration: none;
+    border: solid 1px var(--bs-primary);
+    border-radius: 50%;
+    display: inline-block;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.view-item-btn:hover {
+    color: white;
+    background-color: var(--bs-primary);
+}
