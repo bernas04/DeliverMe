@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -16,7 +15,6 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="purchase")
 public class Purchase {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -31,27 +29,42 @@ public class Purchase {
     @ManyToOne
     private Store store;
 
+    @ManyToOne
     private Client client;
 
     @OneToOne
     private Address address;
     
-    private Long deliverTs;
 
     private int riderReview;
 
+    private int deliverTimeStamp;
 
-    public Purchase(Address address, Store store, Client client, Long deliverTs, int riderReview) {
+    private OrderStatus status;
+
+
+    public Purchase(Address address, Store store, Client client, int riderReview) {
         this.date = new Date();
         this.store = store;
         this.client = client;
-        this.deliverTs = deliverTs;
         this.riderReview = riderReview;
         this.address = address;
+        this.status = OrderStatus.REQUESTED;
     }
 
 
     public Purchase() {}
 
+    public void setStatusCanceled(){
+        this.status=OrderStatus.CANCELED;
+    }
+
+    public void setStatusInProgress(){
+        this.status=OrderStatus.IN_PROGRESS;
+    }
+
+    public void setStatusDelivered(){
+        this.status=OrderStatus.DELIVERED;
+    }
 
 }
