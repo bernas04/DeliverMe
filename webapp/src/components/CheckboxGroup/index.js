@@ -19,6 +19,7 @@ const CheckboxGroup = ({values, selectedValues, setSelectedValues}) => {
                 values.map(val =>
                 <Form.Check
                     key={val}
+                    className="d-inline-block me-4"
                     type="checkbox"
                     label={val}
                     onChange={(e)=>updateValue(e, val)}

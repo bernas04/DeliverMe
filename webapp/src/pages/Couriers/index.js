@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 import CourierCard from './Components/CourierCard'
 
 const Couriers = () => {
@@ -24,7 +24,15 @@ const Couriers = () => {
         <Container>
             <h2 className="my-2">Couriers</h2>
 
-            
+            <br />
+            <Form.Group className="mb-2">
+                <Form.Control type="text" placeholder="Search by courier name or ID" />
+            </Form.Group>
+
+            <div className="d-flex justify-content-end">
+                <Button className="me-2">Reset</Button>
+                <Button>Search</Button>
+            </div>
 
 
             {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Form } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 import CheckboxGroup from "../../components/CheckboxGroup";
 import DeliveryCard from './Components/DeliveryCard'
 
@@ -43,14 +43,18 @@ const Deliveries = () => {
             <h2 className="my-2">Deliveries</h2>
 
             <br />
-            <Form.Group>
+            <Form.Group className="mb-2">
                 <Form.Control type="text" placeholder="Search by delivery name or ID" />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="mb-2">
                 <Form.Control type="text" placeholder="Search by courier name or ID" />
             </Form.Group>
 
             <CheckboxGroup values={possibleStates} selectedValues={selectedStates} setSelectedValues={setSelectedStates} />
+            <div className="d-flex justify-content-end">
+                <Button className="me-2">Reset</Button>
+                <Button>Search</Button>
+            </div>
 
             {
                 testItems.map(item => <DeliveryCard key={item.id} deliveryDetails={item} />)
