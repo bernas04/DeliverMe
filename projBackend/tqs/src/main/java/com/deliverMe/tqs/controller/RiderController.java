@@ -23,6 +23,7 @@ public class RiderController {
 
     @PostMapping("/addRider")
     public Rider addRidder(@RequestBody Rider r){
+        
         return service.saveRider(r);
     }
 
@@ -36,7 +37,7 @@ public class RiderController {
         return service.getRiderId(id);
     }
 
-    @DeleteMapping("deleteRider")
+    @DeleteMapping("/deleteRider")
     public String deleteRider(@RequestParam (value = "id") Long id){
         return service.deleteById(id);
     }

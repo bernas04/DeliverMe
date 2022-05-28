@@ -47,7 +47,27 @@ public class PurchaseController {
     }
     
     @PutMapping("/deliveredPurchase")
-    public Purchase deliveredPurchase(@RequestParam(value = "id") Long id){
-        return service.updatePurchaseDelivered(id);
+    public Purchase deliveredPurchase(@RequestParam(value = "id") Long id, @RequestParam(value = "rate") int rate){
+        return service.updatePurchaseDelivered(id, rate);
+    }
+
+    @GetMapping("/requestedPurchase")
+    public List<Purchase> getRequestPurchases(){
+        return service.getRequestPurchase();
+    }
+
+    @GetMapping("/canceledPurchase")
+    public List<Purchase> getCanceledPurchases(){
+        return service.getCanceledPurchase();
+    }
+
+    @GetMapping("/deliveredPurchase")
+    public List<Purchase> getDeliveredPurchases(){
+        return service.getDeliveredPurchase();
+    }
+
+    @GetMapping("/inProgressPurchase")
+    public List<Purchase> getInProgressPurchases(){
+        return service.getInProgressPurchase();
     }
 }

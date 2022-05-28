@@ -11,10 +11,10 @@ import javax.persistence.Id;
 import lombok.Data;
 @Data
 @Entity
-public class Person {
+public abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     private String name, password;
 
@@ -71,6 +71,16 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            ", birthDate='" + getBirthDate() + "'" +
+            ", email='" + getEmail() + "'" +
+            "}";
     }
 
 

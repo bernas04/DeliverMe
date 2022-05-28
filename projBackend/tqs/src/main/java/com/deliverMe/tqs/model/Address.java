@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
+
 
 import lombok.Data;
 
@@ -13,16 +13,16 @@ import lombok.Data;
 @Entity
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     private String road, city, country, zipcode;
 
-    @OneToOne(mappedBy = "address")
+    @OneToOne
     private Store store;
 
-    @OneToOne(mappedBy = "address")
-    private Purchase purchase;
+    @OneToOne
+    private Client client;
 
     public Address(String road, String city, String country, String zipcode) {
         this.road = road;
