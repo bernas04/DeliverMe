@@ -37,9 +37,6 @@ public abstract class Person {
         return this.id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return this.name;
@@ -53,9 +50,6 @@ public abstract class Person {
         return this.password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public Date getBirthDate() {
         return this.birthDate;

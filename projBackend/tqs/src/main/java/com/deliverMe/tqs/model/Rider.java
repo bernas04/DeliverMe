@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
@@ -28,6 +27,13 @@ public class Rider extends Person{
     }
 
     public Rider(){}
+
+    /* public void completeOrder(int rate){
+        Double allRatesSum = (double)this.totalReviews*this.averageReview;
+        allRatesSum+=rate;
+        this.totalReviews++;
+        this.averageReview=allRatesSum/this.totalReviews;
+    } */
 
 
     @Override

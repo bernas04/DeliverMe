@@ -18,4 +18,23 @@ public class Client extends Person{
         super(name, birthDate, email);
         this.address=address;
     }
+
+    public Client(){}
+
+    public Address getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+
+    @Override
+    public String toString() {
+        return "{" + super.toString() + 
+            " address='" + getAddress() + "'" +
+            "}";
+    }
+    
 }
