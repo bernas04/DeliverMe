@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 import lombok.Data;
 
@@ -33,8 +32,10 @@ public class Store {
     public Store(String name, Address address, Double latitude, Double longitude) {
         this.name = name;
         this.address = address;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        if (latitude>=-90 && latitude<=90)
+            this.latitude = latitude;
+        if (longitude>=-180 && longitude<=180)
+            this.longitude = longitude;
     }
 
     public Store(String name, Address address) {
@@ -55,10 +56,7 @@ public class Store {
         return this.id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
+    
     public String getName() {
         return this.name;
     }
@@ -88,7 +86,8 @@ public class Store {
     }
 
     public void setLatitude(Double latitude) {
-        this.latitude = latitude;
+        if (latitude>=-90 && latitude<=90)
+            this.latitude = latitude;
     }
 
     public Double getLongitude() {
@@ -96,7 +95,8 @@ public class Store {
     }
 
     public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+        if (longitude>=-180 && longitude<=180)
+            this.longitude = longitude;
     }
 
 

@@ -64,8 +64,8 @@ public class Purchase {
         this.deliverTimeStamp = new Timestamp(System.currentTimeMillis());
 
         if (rate <=5 && rate>=0){
-            
-            this.riderReview = rate;
+            this.riderReview=rate;
+            this.rider.updateAverageAndTotalOrders(rate);
         }
     }
 

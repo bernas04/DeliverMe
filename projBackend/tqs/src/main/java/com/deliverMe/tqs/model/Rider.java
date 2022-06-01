@@ -35,6 +35,10 @@ public class Rider extends Person{
         this.averageReview=allRatesSum/this.totalReviews;
     } */
 
+    public void updateAverageAndTotalOrders(int rate){
+        this.averageReview = (this.averageReview*(double) this.totalReviews + rate)/++this.totalReviews;
+    }
+
 
     @Override
     public String toString() {
