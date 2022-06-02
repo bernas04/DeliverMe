@@ -6,6 +6,7 @@ import com.deliverMe.tqs.model.Rider;
 import com.deliverMe.tqs.repository.RiderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,8 +15,16 @@ public class RiderService {
     @Autowired
     private RiderRepository repository;
 
-    public Rider saveRider(Rider r){
+    @Autowired
+    private PasswordEncoder encoder;
+
+
+    public Rider saveRider(Rider r) throws Error{
+        if (repository.findByEmail(r.getEmail()).isEmpty()){
+            r.setPassword(encoder.encode(r.getPassword()));
+        }
         return repository.save(r);
+
     }
 
     public List<Rider> getRiders(){
