@@ -14,7 +14,9 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path='/' element={<App />}>
-        <Route index element={<Dashboard />} />
+        <Route path='manage' element={<Dashboard />}>
+          <Route path=':deliveryId' element={<DeliveryDetails />} />
+        </Route>
         <Route path='deliveries' element={<Deliveries />} />
         <Route path='deliveries/:deliveryId' element={<DeliveryDetails />} />
         <Route path='couriers' element={<Couriers />} />

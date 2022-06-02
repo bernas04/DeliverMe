@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import CheckboxGroup from "../../components/CheckboxGroup";
-import DeliveryCard from './Components/DeliveryCard'
+import DeliveryList from "../../components/DeliveryList";
 
 const Deliveries = () => {
 
@@ -56,9 +56,7 @@ const Deliveries = () => {
                 <Button>Search</Button>
             </div>
 
-            {
-                testItems.map(item => <DeliveryCard key={item.id} deliveryDetails={item} />)
-            }
+            <DeliveryList items={testItems} link="/deliveries/" />
 
         </Container>
     );

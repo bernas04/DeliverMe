@@ -24,7 +24,7 @@ const DeliveryDetails = () => {
 
     return(
         <Container>
-            <Link className="btn btn-primary" to="/deliveries">Back</Link>
+            <Link className="btn btn-primary" to="..">Back</Link>
             <h2 className="mt-3">Delivery #{params.deliveryId}: {item.name}</h2>
             <h3 className="mb-3">Status: <span className="h3 badge bg-secondary">{item.status}</span></h3>
 

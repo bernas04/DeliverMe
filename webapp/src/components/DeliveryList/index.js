@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, Row, Col } from 'react-bootstrap';
 import { FiEye } from 'react-icons/fi';
 
-const DeliveryCard = ({deliveryDetails}) => {
+const DeliveryCard = ({deliveryDetails, link}) => {
 
     let statusBadgeClass = "";
     switch (deliveryDetails.status) {
@@ -43,7 +43,7 @@ const DeliveryCard = ({deliveryDetails}) => {
                     </div>
                 </Col>
                 <Col xs="2" className="d-flex flex-column justify-content-center">
-                    <Link className="view-item-btn ms-auto" to={"/deliveries/" + deliveryDetails.id}><FiEye size="2rem" /></Link>
+                    <Link className="view-item-btn ms-auto" to={link + deliveryDetails.id}><FiEye size="2rem" /></Link>
                 </Col>
             </Card.Body>
             
@@ -51,4 +51,16 @@ const DeliveryCard = ({deliveryDetails}) => {
     )
 
 };
-export default DeliveryCard;
+
+
+const DeliveryList = ({items, link}) => {
+
+
+    return(
+        <div>
+            {items.map(item => <DeliveryCard key={item.id} deliveryDetails={item} link={link} />)}
+        </div>
+    )
+
+};
+export default DeliveryList;

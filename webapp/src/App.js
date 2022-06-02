@@ -1,9 +1,19 @@
 import './App.css';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import SideNav from './components/SideNav';
+import { useEffect } from 'react';
 
 function App() {
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if (location.pathname === "/")
+      navigate("manage");
+  })
+
   return (
     <Row className='h-100 justify-content-end'>
       <Col md="2" className='h-100 position-fixed start-0 ps-0'>
