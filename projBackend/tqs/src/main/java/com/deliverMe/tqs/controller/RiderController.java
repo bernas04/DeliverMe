@@ -2,8 +2,8 @@ package com.deliverMe.tqs.controller;
 
 import java.util.List;
 
-import com.deliverMe.tqs.model.Store;
-import com.deliverMe.tqs.services.StoreService;
+import com.deliverMe.tqs.model.Rider;
+import com.deliverMe.tqs.services.RiderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,29 +15,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/stores/")
-public class StoreController {
+@RequestMapping("/api/riders")
+public class RiderController {
+    
     @Autowired
-    StoreService service;
+    RiderService service;
 
-    @PostMapping("/addStore")
-    public Store addStore(@RequestBody Store s){
-        return service.saveStore(s);
+    @PostMapping("/addRider")
+    public Rider addRidder(@RequestBody Rider r){
+        
+        return service.saveRider(r);
     }
 
-    @GetMapping("/stores")
-    public List<Store> getAllStores(){
-        return service.getStores();
-    }
-
-    @GetMapping("/store")
-    public Store getStoreId(@RequestParam(value = "id") long id){
-        return service.getStoreId(id);
-    }
-
-    @DeleteMapping("/deleteStore")
-    public String deleteStore(@RequestParam(value = "id") long id){
-        return service.deleteById(id);
+    @GetMapping("/Riders")
+    public List<Rider> getAllRiders(){
+        return service.getRiders();
     }
     
+    @GetMapping("/Rider")
+    public Rider getRiderId(@RequestParam (value = "id") Long id){
+        return service.getRiderId(id);
+    }
+
+    @DeleteMapping("/deleteRider")
+    public String deleteRider(@RequestParam (value = "id") Long id){
+        return service.deleteById(id);
+    }
+
 }

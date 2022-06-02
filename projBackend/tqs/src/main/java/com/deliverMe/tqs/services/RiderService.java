@@ -2,33 +2,32 @@ package com.deliverMe.tqs.services;
 
 import java.util.List;
 
-import com.deliverMe.tqs.model.Store;
-import com.deliverMe.tqs.repository.StoreRepository;
+import com.deliverMe.tqs.model.Rider;
+import com.deliverMe.tqs.repository.RiderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StoreService {
+public class RiderService {
     
     @Autowired
-    private StoreRepository repository;
+    private RiderRepository repository;
 
-
-    public Store saveStore(Store s){
-        return repository.save(s);
+    public Rider saveRider(Rider r){
+        return repository.save(r);
     }
 
-    public List<Store> getStores(){
+    public List<Rider> getRiders(){
         return repository.findAll();
     }
 
-    public Store getStoreId(Long id){
+    public Rider getRiderId(Long id){
         return repository.getReferenceById(id);
     }
 
     public String deleteById(Long id){
         repository.deleteById(id);
-        return "Store removed!";
+        return "Rider deleted!";
     }
 }

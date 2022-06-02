@@ -2,33 +2,32 @@ package com.deliverMe.tqs.services;
 
 import java.util.List;
 
-import com.deliverMe.tqs.model.Store;
-import com.deliverMe.tqs.repository.StoreRepository;
+import com.deliverMe.tqs.model.Address;
+import com.deliverMe.tqs.repository.AddressRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StoreService {
+public class AddressService {
     
     @Autowired
-    private StoreRepository repository;
+    public AddressRepository repository;
 
-
-    public Store saveStore(Store s){
+    public Address saveAddress(Address s){
         return repository.save(s);
     }
 
-    public List<Store> getStores(){
+    public List<Address> getAddresses(){
         return repository.findAll();
     }
 
-    public Store getStoreId(Long id){
+    public Address getAddressId(Long id){
         return repository.getReferenceById(id);
     }
 
     public String deleteById(Long id){
         repository.deleteById(id);
-        return "Store removed!";
+        return "Address removed!";
     }
 }

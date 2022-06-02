@@ -5,25 +5,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
+
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name="address")
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     private String road, city, country, zipcode;
 
-    @OneToOne(mappedBy = "address")
+    @OneToOne
     private Store store;
 
-    @OneToOne(mappedBy = "address")
-    private Purchase purchase;
+    @OneToOne
+    private Client client;
 
     public Address(String road, String city, String country, String zipcode) {
         this.road = road;
@@ -33,5 +32,75 @@ public class Address {
     }
 
     public Address(){}
+
+
+
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getRoad() {
+        return this.road;
+    }
+
+    public void setRoad(String road) {
+        this.road = road;
+    }
+
+    public String getCity() {
+        return this.city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return this.country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getZipcode() {
+        return this.zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public Store getStore() {
+        return this.store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public Client getClient() {
+        return this.client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            "Road='" + getRoad() + "'" +
+            ", city='" + getCity() + "'" +
+            ", country='" + getCountry() + "'" +
+            ", zipcode='" + getZipcode() + "'" +
+            "}";
+    }
+
 
 }

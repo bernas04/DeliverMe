@@ -16,7 +16,7 @@ public class Rider extends Person{
 
     private int totalReviews;
 
-    @OneToMany(mappedBy = "rider")
+    @OneToMany
     private List<Purchase> purchases;
 
 
@@ -27,5 +27,42 @@ public class Rider extends Person{
     }
 
     public Rider(){}
+
+    /* public void completeOrder(int rate){
+        Double allRatesSum = (double)this.totalReviews*this.averageReview;
+        allRatesSum+=rate;
+        this.totalReviews++;
+        this.averageReview=allRatesSum/this.totalReviews;
+    } */
+
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    public double getAverageReview() {
+        return this.averageReview;
+    }
+
+    public void setAverageReview(double averageReview) {
+        this.averageReview = averageReview;
+    }
+
+    public int getTotalReviews() {
+        return this.totalReviews;
+    }
+
+    public void setTotalReviews(int totalReviews) {
+        this.totalReviews = totalReviews;
+    }
+
+    public List<Purchase> getPurchases() {
+        return this.purchases;
+    }
+
+    public void setPurchases(List<Purchase> purchases) {
+        this.purchases = purchases;
+    }
 
 }
