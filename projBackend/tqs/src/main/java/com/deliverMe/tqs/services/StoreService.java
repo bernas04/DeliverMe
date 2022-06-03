@@ -3,7 +3,6 @@ package com.deliverMe.tqs.services;
 import java.util.List;
 
 import com.deliverMe.tqs.model.Store;
-import com.deliverMe.tqs.repository.PurchaseRepository;
 import com.deliverMe.tqs.repository.StoreRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,6 @@ public class StoreService {
 
     public String deleteById(Long id){
         repository.deleteById(id);
-        return "Store removed!!";
+        return "Store removed!";
     }
 }
