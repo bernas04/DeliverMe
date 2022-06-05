@@ -35,7 +35,6 @@ public class Purchase {
     
     private int riderReview;
 
-    private Timestamp deliverTimeStamp;
 
     private OrderStatus status;
 
@@ -61,7 +60,7 @@ public class Purchase {
 
     public void setStatusDelivered(int rate){
         this.status=OrderStatus.DELIVERED;
-        this.deliverTimeStamp = new Timestamp(System.currentTimeMillis());
+        
 
         if (rate <=5 && rate>=0){
             
@@ -115,13 +114,6 @@ public class Purchase {
         this.riderReview = riderReview;
     }
 
-    public Timestamp getDeliverTimeStamp() {
-        return this.deliverTimeStamp;
-    }
-
-    public void setDeliverTimeStamp(Timestamp deliverTimeStamp) {
-        this.deliverTimeStamp = deliverTimeStamp;
-    }
 
     public OrderStatus getStatus() {
         return this.status;
