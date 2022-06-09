@@ -46,7 +46,7 @@ public class PurchaseController {
         return service.updatePurchaseInProgress(id);
     }
     
-    @PutMapping("/deliveredPurchase")
+    @PutMapping("/deliverPurchase")
     public Purchase deliveredPurchase(@RequestParam(value = "id") Long id, @RequestParam(value = "rate") int rate){
         return service.updatePurchaseDelivered(id, rate);
     }
