@@ -22,7 +22,7 @@ public class ClientService {
     }
 
     public Client getClientId(Long id){
-        return repository.getReferenceById(id);
+        return repository.findById(id).get();
     }
 
     public String deleteById(Long id){

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 
 const DeliveryDetails = () => {
@@ -17,6 +17,11 @@ const DeliveryDetails = () => {
             default:
                 return "bg-secondary";
         }
+    }
+
+    const parseDate = (dateString) => {
+        const date = new Date(Date.parse(dateString))
+        return `${date.toTimeString().slice(0, 8)} on ${date.toDateString()}`
     }
     
 
@@ -61,15 +66,28 @@ const DeliveryDetails = () => {
                     <h2 className="mt-3">Delivery #{item.id}: From <strong>{item.store.address.road}</strong> to <strong>{item.client.address.road}</strong></h2>
                     <h3 className="mb-3">Status: <span className={`h3 badge ${getStatusClass(item.status)}`}>{item.status}</span></h3>
 
+                    <Row className="mb-4">
+                        <Col md="6">
+                            <h3>Origin</h3>
+                            <p className="fs-4 mb-0">{item.store.address.road}, {item.store.address.city}</p>
+                            <p className="fs-4 mb-0">Zipcode: {item.store.address.zipcode}</p>
+                        </Col>
+                        <Col md="6">
+                            <h3>Destination</h3>
+                            <p className="fs-4 mb-0">{item.client.address.road}, {item.client.address.city}</p>
+                            <p className="fs-4 mb-0">Zipcode: {item.client.address.zipcode}</p>
+                        </Col>
+                    </Row>
+
                     <dl className="fs-4">
-                        <dt>Information:</dt>
-                        <dd>Value</dd>
+                        <dt>Requested on:</dt>
+                        <dd>{parseDate(item.date)}</dd>
 
-                        <dt>Other bit of info:</dt>
-                        <dd>Another value</dd>
+                        <dt>Business:</dt>
+                        <dd>{item.store.name}</dd>
 
-                        <dt>Courier:</dt>
-                        <dd>{item.courier}</dd>
+                        <dt>Client:</dt>
+                        <dd>{item.client.name}</dd>
                     </dl>
                 </>
             }

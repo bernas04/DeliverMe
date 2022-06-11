@@ -25,7 +25,7 @@ public class PurchaseService {
     }
 
     public Purchase getPurchaseId(Long id){
-        return repository.getReferenceById(id);
+        return repository.findById(id).get();
     }
 
     public Purchase updatePurchaseCanceled(Long id){

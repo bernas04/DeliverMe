@@ -23,7 +23,7 @@ public class AddressService {
     }
 
     public Address getAddressId(Long id){
-        return repository.getReferenceById(id);
+        return repository.findById(id).get();
     }
 
     public String deleteById(Long id){
