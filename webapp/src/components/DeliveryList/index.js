@@ -6,7 +6,7 @@ import { FiEye } from 'react-icons/fi';
 const DeliveryCard = ({deliveryDetails, link}) => {
 
     let statusBadgeClass = "";
-    switch (deliveryDetails.status) {
+    switch (deliveryDetails.status.toLowerCase()) {
         case "delivered":
             statusBadgeClass = "bg-success";
             break;
@@ -27,17 +27,22 @@ const DeliveryCard = ({deliveryDetails, link}) => {
         <Card className="my-3">
             <Card.Body className="row">
                 <Col xs="10">
-                    <Card.Title>{deliveryDetails.name}</Card.Title>
+                    <Card.Title>
+                        #{deliveryDetails.id} - From <strong>{deliveryDetails.store.address.road}</strong> to <strong>{deliveryDetails.client.address.road}</strong>
+                    </Card.Title>
                     <div className="card-text">
                         <Row>
                             <Col xs="3">
                                 Status: <span className={"badge " + statusBadgeClass}>{deliveryDetails.status}</span>
                             </Col>
                             <Col xs="3">
-                                Courier: {deliveryDetails.courier ? deliveryDetails.courier : "None"}
+                                Courier: {deliveryDetails.rider ? deliveryDetails.rider : "None"}
                             </Col>
                             <Col xs="3">
-                                Business: {deliveryDetails.business}
+                                Business: {deliveryDetails.store.name}
+                            </Col>
+                            <Col xs="3">
+                                Client: {deliveryDetails.client.name}
                             </Col>
                         </Row>
                     </div>

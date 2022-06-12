@@ -24,7 +24,7 @@ public class StoreService {
     }
 
     public Store getStoreId(Long id){
-        return repository.getReferenceById(id);
+        return repository.findById(id).get();
     }
 
     public String deleteById(Long id){

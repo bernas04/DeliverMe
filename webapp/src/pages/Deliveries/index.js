@@ -5,29 +5,26 @@ import DeliveryList from "../../components/DeliveryList";
 
 const Deliveries = () => {
 
-    const testItems = [
-        {
-            "id": 100,
-            "name": "delivery1",
-            "status": "requested",
-            "courier": 200,
-            "business": 10,
-        },
-        {
-            "id": 101,
-            "name": "delivery2",
-            "status": "in progress",
-            "courier": 200,
-            "business": 11,
-        },
-        {
-            "id": 102,
-            "name": "delivery3",
-            "status": "delivered",
-            "courier": 200,
-            "business": 10,
-        },
-    ]
+    const [fetchError, setFetchError] = useState(false);
+    const [deliveries, setDeliveries] = useState([]);
+
+    // change to requested and in-progress only
+    useEffect(()=>{
+        fetch(
+            `${process.env.REACT_APP_API_URL}/purchases/Purchases`,
+            {
+                headers: {'Access-Control-Allow-Origin': '*'}
+            }
+        )
+        .then(response => response.json())
+        .then(data => {
+            setDeliveries(data)
+        })
+        .catch((reason) => {
+            console.log(reason)
+            setFetchError(true)
+        })
+    }, [])
 
 
     const possibleStates = ["requested", "in progress", "delivered", "canceled"];
@@ -56,8 +53,12 @@ const Deliveries = () => {
                 <Button>Search</Button>
             </div>
 
-            <DeliveryList items={testItems} link="/deliveries/" />
-
+            {
+                fetchError ?
+                <h3>An error ocorred while fetching data</h3>
+                :
+                <DeliveryList items={deliveries} link="/deliveries/" />
+            }
         </Container>
     );
 };
