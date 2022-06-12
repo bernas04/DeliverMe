@@ -38,36 +38,32 @@ public class TqsApplication {
 	public CommandLineRunner demo(ClientService clientService,ManagerService managerService, PurchaseService purchaseService, RiderService riderService, StoreService storeService, AddressService addressService){
 		return(args) -> {
 			
-			/* Rider r1 = new Rider("Quim", new Date(2001, 02, 29), "quim@ua.pt");
-			Rider r2 = new Rider("Maria", new Date(1999, 12, 19), "maria@ua.pt");
-			riderService.saveRider(r1);
-			riderService.saveRider(r2);
 
-			Manager m = new Manager("admin", new Date(1987, 12, 25), "admin@ua.pt");
-			managerService.saveManager(m);
-		
-			Address a = new Address("Rua da Estia", "Campia", "Portugal", "3670");
-			Address a2 = new Address("Rua da Velhice", "Ovar", "Portugal", "3800");
+			if (riderService.getRiders().size()==0){
+				Rider r1 = new Rider("Quim", new Date(2001, 02, 29), "quim@ua.pt");
+				Rider r2 = new Rider("Maria", new Date(1999, 12, 19), "maria@ua.pt");
+				riderService.saveRider(r1);
+				riderService.saveRider(r2);
+			}
 
-			addressService.saveAddress(a);
-			addressService.saveAddress(a2);
+			if (managerService.getManagers().size()==0){
+				Manager m = new Manager("admin", new Date(1987, 12, 25), "admin@ua.pt");
+				managerService.saveManager(m);
+			}
 
-
-			storeService.saveStore(s);
-			
-			
-			clientService.saveClient(c);
-			
-			Store s = new Store("BookShelf", a, 90.0, 89.0);
-			Client c = new Client("Antonieta", new Date(2010, 9, 30), "antonieta@ua.pt", a2);
-
-			
-			Purchase p1 = new Purchase(s, c, 4);
-			purchaseService.addPurchase(p1); */
-
-
-
-
+			if (addressService.getAddresses().size()==0 && storeService.getStores().size()==0 && clientService.getClient().size()==0 && purchaseService.getAllPurchases().size()==0){
+				Address a = new Address("Rua da Estia", "Campia", "Portugal", "3670");
+				Address a2 = new Address("Rua da Velhice", "Ovar", "Portugal", "3800");
+	
+				addressService.saveAddress(a);
+				addressService.saveAddress(a2);
+				Store s = new Store("BookShelf", a, 90.0, 89.0);
+				storeService.saveStore(s);
+				Client c = new Client("Antonieta", new Date(2010, 9, 30), "antonieta@ua.pt", a2);
+				clientService.saveClient(c);
+				Purchase p1 = new Purchase(s, c, 4);
+				purchaseService.addPurchase(p1);
+			}		
 
 		};
 	}

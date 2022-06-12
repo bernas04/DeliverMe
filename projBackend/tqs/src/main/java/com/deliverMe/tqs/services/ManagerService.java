@@ -37,4 +37,8 @@ public class ManagerService {
     public Manager saveManager(Manager m){
         return managerRepository.save(m);
     }
+
+    public List<Manager> getManagers(){
+        return managerRepository.findAll();
+    }
 }

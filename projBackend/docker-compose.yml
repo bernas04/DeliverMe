@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  app:
+    image: 'tqs:latest'
+    build:
+      context: ./tqs/src/main/docker
+    container_name: app
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.datasource.url=jdbc:postgresql://db:5432/deliverme
+      - spring.datasource.username=postgres
+      - spring.datasource.password=root
+      - spring.jpa.hibernate.ddl-auto=update
+  
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=deliverme
