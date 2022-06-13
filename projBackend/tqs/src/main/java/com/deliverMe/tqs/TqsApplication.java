@@ -6,14 +6,12 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import com.deliverMe.tqs.model.Address;
-import com.deliverMe.tqs.model.Client;
 import com.deliverMe.tqs.model.Manager;
 import com.deliverMe.tqs.model.Purchase;
 import com.deliverMe.tqs.model.Rider;
 import com.deliverMe.tqs.model.Store;
 import com.deliverMe.tqs.repository.AddressRepository;
 import com.deliverMe.tqs.services.AddressService;
-import com.deliverMe.tqs.services.ClientService;
 import com.deliverMe.tqs.services.ManagerService;
 import com.deliverMe.tqs.services.PurchaseService;
 import com.deliverMe.tqs.services.RiderService;
@@ -35,7 +33,7 @@ public class TqsApplication {
 
 	@Transactional
 	@Bean
-	public CommandLineRunner demo(ClientService clientService,ManagerService managerService, PurchaseService purchaseService, RiderService riderService, StoreService storeService, AddressService addressService){
+	public CommandLineRunner demo(ManagerService managerService, PurchaseService purchaseService, RiderService riderService, StoreService storeService, AddressService addressService){
 		return(args) -> {
 			
 
@@ -51,7 +49,7 @@ public class TqsApplication {
 				managerService.saveManager(m);
 			}
 
-			if (addressService.getAddresses().size()==0 && storeService.getStores().size()==0 && clientService.getClient().size()==0 && purchaseService.getAllPurchases().size()==0){
+			if (addressService.getAddresses().size()==0 && storeService.getStores().size()==0 && purchaseService.getAllPurchases().size()==0){
 				Address a = new Address("Rua da Estia", "Campia", "Portugal", "3670");
 				Address a2 = new Address("Rua da Velhice", "Ovar", "Portugal", "3800");
 	
@@ -59,9 +57,7 @@ public class TqsApplication {
 				addressService.saveAddress(a2);
 				Store s = new Store("BookShelf", a, 90.0, 89.0);
 				storeService.saveStore(s);
-				Client c = new Client("Antonieta", new Date(2010, 9, 30), "antonieta@ua.pt", a2);
-				clientService.saveClient(c);
-				Purchase p1 = new Purchase(s, c, 4);
+				Purchase p1 = new Purchase(s, "Maria",a);
 				purchaseService.addPurchase(p1);
 			}		
 

@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -18,11 +19,14 @@ public class Address {
 
     private String road, city, country, zipcode;
 
-    @OneToOne
+    @JsonIgnore
+    @OneToOne(mappedBy = "address")
     private Store store;
 
-    @OneToOne
-    private Client client;
+    @OneToOne(mappedBy = "address")
+    @JsonIgnore
+    private Purchase purchase;
+
 
     public Address(String road, String city, String country, String zipcode) {
         this.road = road;
@@ -83,13 +87,7 @@ public class Address {
         this.store = store;
     }
 
-    public Client getClient() {
-        return this.client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
+    
 
 
     @Override

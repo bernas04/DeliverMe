@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -29,8 +30,10 @@ public class Purchase {
     @ManyToOne
     private Store store;
 
-    @ManyToOne
-    private Client client;
+    private String client;
+
+    @OneToOne
+    private Address address;
 
     
     private int riderReview;
@@ -39,11 +42,11 @@ public class Purchase {
     private OrderStatus status;
 
 
-    public Purchase(Store store, Client client, int riderReview) {
+    public Purchase(Store store, String client, Address address) {
         this.date = new Date();
         this.store = store;
         this.client = client;
-        this.riderReview = riderReview;
+        this.address=address;
         this.status = OrderStatus.REQUESTED;
     }
 
@@ -88,6 +91,7 @@ public class Purchase {
 
     public void setRider(Rider rider) {
         this.rider = rider;
+        this.status=OrderStatus.IN_PROGRESS;
     }
 
     public Store getStore() {
@@ -98,11 +102,11 @@ public class Purchase {
         this.store = store;
     }
 
-    public Client getClient() {
+    public String getClient() {
         return this.client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(String client) {
         this.client = client;
     }
 
