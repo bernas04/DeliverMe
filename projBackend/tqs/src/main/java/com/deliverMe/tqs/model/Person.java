@@ -18,13 +18,13 @@ public abstract class Person {
 
     private String name, password;
 
-    private Date birthDate;
+    private String birthDate;
 
     @Column(unique = true)
     private String email;
 
 
-    public Person(String name, Date birthDate, String email) {
+    public Person(String name, String birthDate, String email) {
         this.name = name;
         this.birthDate = birthDate;
         this.email = email;
@@ -51,11 +51,11 @@ public abstract class Person {
     }
 
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return this.birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

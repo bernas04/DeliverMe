@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class RiderTest {
     
-    private static Rider r = new Rider("Ze", new Date(1967, 04, 25), "rider@rider.pt");
+    private static Rider r = new Rider("Ze", "1967, 04, 25", "rider@rider.pt");
     private static List<Purchase> listPurchase = new ArrayList<>();
     
     @BeforeAll

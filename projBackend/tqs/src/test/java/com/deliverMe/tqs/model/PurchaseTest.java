@@ -17,7 +17,7 @@ public class PurchaseTest {
     @BeforeEach
     public void setUp(){
         Purchase p = new Purchase();
-        Rider r = new Rider("José", new Date(2000,04,21), "jose@ua.pt");
+        Rider r = new Rider("José", "2000-04-21", "jose@ua.pt");
         Store s = new Store();
 
         s.setName("Loja das meias");

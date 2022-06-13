@@ -2,6 +2,7 @@ package com.deliverMe.tqs.repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,31 @@ public class AddressRepositoryTest {
         List<Address> allAddress = repository.findAll();
 
         assertThat(allAddress).isNotNull().hasSize(2).extracting(Address::getId).contains(a1.getId(), a2.getId());
+        assertThat(allAddress).isNotNull().extracting(Address::getRoad).containsExactly(a1.getRoad(), a2.getRoad()).hasExactlyElementsOfTypes(String.class, String.class);
+
     }
+
+    @Test
+    public void getEmptyListAndCheckIsEmpty(){
+        List<Address> allAddress = repository.findAll();
+
+        assertThat(allAddress).isNotNull().isEmpty();
+    }
+
+    @Test
+    public void findById(){
+        Address a = new Address("Rua da Pega", "Aveiro", "Portugal", "3800");
+        manager.persistAndFlush(a);
+        
+        Optional<Address> fromRep = repository.findById(a.getId());
+
+        assertThat(fromRep).contains(a).hasValue(a);
+    }
+
+    @Test
+    public void findByInvalidId(){
+        Optional<Address> fromRep=repository.findById(1000000000000L);
+        assertThat(fromRep).isNotNull().isEmpty().isNotPresent();
+    }
+
 }

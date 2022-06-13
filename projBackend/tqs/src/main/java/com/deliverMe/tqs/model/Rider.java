@@ -20,7 +20,7 @@ public class Rider extends Person{
     private List<Purchase> purchases;
 
 
-    public Rider(String name, Date birthDate, String email) {
+    public Rider(String name, String birthDate, String email) {
         super(name, birthDate, email);
         this.averageReview = 0.0;
         this.totalReviews = 0;
