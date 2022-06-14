@@ -31,21 +31,21 @@ public class TqsApplication {
 		SpringApplication.run(TqsApplication.class, args);
 	}
 
-	/* @Transactional
+	@Transactional
 	@Bean
 	public CommandLineRunner demo(ManagerService managerService, PurchaseService purchaseService, RiderService riderService, StoreService storeService, AddressService addressService){
 		return(args) -> {
 			
 
 			if (riderService.getRiders().size()==0){
-				Rider r1 = new Rider("Quim", new Date(2001, 02, 29), "quim@ua.pt");
-				Rider r2 = new Rider("Maria", new Date(1999, 12, 19), "maria@ua.pt");
+				Rider r1 = new Rider("Quim", "2001-02-29", "quim@ua.pt");
+				Rider r2 = new Rider("Maria", "1999-12-19", "maria@ua.pt");
 				riderService.saveRider(r1);
 				riderService.saveRider(r2);
 			}
 
 			if (managerService.getManagers().size()==0){
-				Manager m = new Manager("admin", new Date(1987, 12, 25), "admin@ua.pt");
+				Manager m = new Manager("admin", "1987-12-25", "admin@ua.pt");
 				managerService.saveManager(m);
 			}
 
@@ -57,11 +57,11 @@ public class TqsApplication {
 				addressService.saveAddress(a2);
 				Store s = new Store("BookShelf", a, 90.0, 89.0);
 				storeService.saveStore(s);
-				Purchase p1 = new Purchase(s, "Maria",a);
+				Purchase p1 = new Purchase(s, "Maria",a2);
 				purchaseService.addPurchase(p1);
 			}		
 
 		};
-	} */
+	}
 
 }

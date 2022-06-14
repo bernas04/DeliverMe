@@ -4,7 +4,6 @@ import { Card, Row, Col } from 'react-bootstrap';
 import { FiEye } from 'react-icons/fi';
 
 const DeliveryCard = ({deliveryDetails, link}) => {
-
     let statusBadgeClass = "";
     switch (deliveryDetails.status.toLowerCase()) {
         case "delivered":
@@ -28,7 +27,7 @@ const DeliveryCard = ({deliveryDetails, link}) => {
             <Card.Body className="row">
                 <Col xs="10">
                     <Card.Title>
-                        #{deliveryDetails.id} - From <strong>{deliveryDetails.store.address.road}</strong> to <strong>{deliveryDetails.client.address.road}</strong>
+                        #{deliveryDetails.id} - From <strong>{deliveryDetails.store.address.road}</strong> to <strong>{deliveryDetails.address.road}</strong>
                     </Card.Title>
                     <div className="card-text">
                         <Row>
@@ -39,7 +38,7 @@ const DeliveryCard = ({deliveryDetails, link}) => {
                                 Courier: {deliveryDetails.rider ? deliveryDetails.rider : "None"}
                             </Col>
                             <Col xs="3">
-                                Business: {deliveryDetails.store.name}
+                                Business: <strong>{deliveryDetails.store.name}</strong>
                             </Col>
                             <Col xs="3">
                                 Client: {deliveryDetails.client.name}
