@@ -26,11 +26,6 @@ public class Rider extends Person{
         this.totalReviews = 0;
     }
 
-    public Rider(String name, String password, String email) {
-        super(name, password, email);
-        this.averageReview = 0.0;
-        this.totalReviews = 0;
-    }
 
     public Rider(){}
 
