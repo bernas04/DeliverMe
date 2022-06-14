@@ -115,6 +115,7 @@ public class Purchase {
     }
 
     public void setRiderReview(int riderReview) {
+        this.status=OrderStatus.DELIVERED;
         this.riderReview = riderReview;
     }
 
