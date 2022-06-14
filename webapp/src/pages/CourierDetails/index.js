@@ -10,6 +10,7 @@ const CourierDetails = () => {
     // state variables
     const [fetchError, setFetchError] = useState(false);
     const [rider, setItem] = useState(null);
+    const [hasPastDeliveries , setPurchase] = useState(false);
 
     // fetch delivery details on load
     useEffect(()=>{
@@ -22,7 +23,9 @@ const CourierDetails = () => {
         .then(response => response.json())
         .then(data => {
             setItem(data)
-            console.log(data)
+            if (data.purchases.length!==0){
+                setPurchase=true;
+            }
         })
         .catch((reason) => {
             console.log(reason)
@@ -32,10 +35,7 @@ const CourierDetails = () => {
 
 
     
-    let hasPastDeliveries=false;
-    if (rider.purchases.length!==0){
-        hasPastDeliveries=true;
-    }
+    
 
 
     return(
