@@ -5,7 +5,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.deliverMe.tqs.repository.ManagerRepository;
-import com.deliverMe.tqs.repository.PurchaseRepository;
 import com.deliverMe.tqs.repository.RiderRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -16,5 +15,7 @@ public class ManagerServiceTest {
 
     @Mock
     private RiderRepository riderRepository;
+
+
     
 }
