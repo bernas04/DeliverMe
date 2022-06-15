@@ -12,10 +12,13 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Data
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Purchase {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
@@ -58,8 +61,10 @@ public class Purchase {
         this.status=OrderStatus.CANCELED;
     }
 
-    public void setStatusInProgress(){
+    public void setStatusInProgress(Rider r){
+        this.rider= r;
         this.status=OrderStatus.IN_PROGRESS;
+        System.out.println(this);
     }
 
     public void setStatusDelivered(int rate){

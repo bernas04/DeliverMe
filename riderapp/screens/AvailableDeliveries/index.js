@@ -3,17 +3,6 @@ import DeliveryList from '../../components/DeliveryList';
 import React, { useEffect, useState } from "react";
 
 
-const TEST_DATA = [
-  {
-    id: 10,
-    name: "a cool delivery"
-  },
-  {
-    id: 11,
-    name: "a lame delivery"
-  }
-];
-
 const AvailableDeliveriesScreen = ({navigation}) => {
 
     const [fetchError, setFetchError] = useState(false);
@@ -38,7 +27,7 @@ const AvailableDeliveriesScreen = ({navigation}) => {
         })
     }, [])
     
-    console.log("--> " ,deliveries)
+    
     return(
       <View style={styles.container}>
         <Text style={styles.title}>Available Deliveries</Text>

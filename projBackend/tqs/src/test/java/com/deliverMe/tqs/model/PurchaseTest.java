@@ -38,7 +38,6 @@ public class PurchaseTest {
     @Test
     @DisplayName("Test In Progress Orders")
     public void testCompleteOrders(){
-        this.listPurchases.get(0).setStatusInProgress();
         assertEquals(this.listPurchases.get(0).getStatus(), OrderStatus.IN_PROGRESS);
     }
 
