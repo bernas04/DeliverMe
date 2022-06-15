@@ -34,7 +34,7 @@ const Deliveries = () => {
         console.log(selectedStates);
     }, [selectedStates])
 
-
+    console.log(deliveries)
     return(
         <Container>
             <h2 className="my-2">Deliveries</h2>

@@ -41,7 +41,7 @@ const DeliveryCard = ({deliveryDetails, link}) => {
                                 Business: <strong>{deliveryDetails.store.name}</strong>
                             </Col>
                             <Col xs="3">
-                                Client: {deliveryDetails.client.name}
+                                Client: <strong>{deliveryDetails.client}</strong>
                             </Col>
                         </Row>
                     </div>
@@ -58,7 +58,6 @@ const DeliveryCard = ({deliveryDetails, link}) => {
 
 
 const DeliveryList = ({items, link}) => {
-
 
     return(
         <div>

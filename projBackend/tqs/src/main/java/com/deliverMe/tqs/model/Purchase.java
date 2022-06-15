@@ -43,10 +43,11 @@ public class Purchase {
 
 
     public Purchase(Store store, String client, Address address) {
-        this.date = new Date();
         this.store = store;
         this.client = client;
         this.address=address;
+        
+        this.date = new Date();
         this.status = OrderStatus.REQUESTED;
     }
 
@@ -117,6 +118,7 @@ public class Purchase {
     public void setRiderReview(int riderReview) {
         this.status=OrderStatus.DELIVERED;
         this.riderReview = riderReview;
+        this.rider.addOnePurchase(this);
     }
 
 
@@ -127,5 +129,25 @@ public class Purchase {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
+
+    public Address getAddress(){
+        return this.address;
+    }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", date='" + getDate() + "'" +
+            ", rider='" + getRider() + "'" +
+            ", store='" + getStore() + "'" +
+            ", client='" + getClient() + "'" +
+            ", address='" + getAddress() + "'" +
+            ", riderReview='" + getRiderReview() + "'" +
+            ", status='" + getStatus() + "'" +
+            "}";
+    }
+
 
 }

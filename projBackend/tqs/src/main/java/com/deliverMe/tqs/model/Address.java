@@ -24,7 +24,6 @@ public class Address {
     private Store store;
 
     @OneToOne(mappedBy = "address")
-    @JsonIgnore
     private Purchase purchase;
 
 

@@ -21,7 +21,8 @@ public class PurchaseService {
     }
 
     public List<Purchase> getAllPurchases(){
-        return repository.findAll();
+        List<Purchase> all = repository.findAll(); 
+        return all;
     }
 
     public Purchase getPurchaseId(Long id){

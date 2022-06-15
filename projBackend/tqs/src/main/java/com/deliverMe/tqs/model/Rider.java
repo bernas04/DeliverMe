@@ -1,5 +1,6 @@
 package com.deliverMe.tqs.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class Rider extends Person{
         super(name, birthDate, email);
         this.averageReview = 0.0;
         this.totalReviews = 0;
+        purchases=new ArrayList<>();
     }
 
     public Rider(){}
@@ -63,6 +65,10 @@ public class Rider extends Person{
 
     public void setPurchases(List<Purchase> purchases) {
         this.purchases = purchases;
+    }
+
+    public void addOnePurchase(Purchase p){
+        purchases.add(p);
     }
 
 }
