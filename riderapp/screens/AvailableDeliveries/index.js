@@ -7,12 +7,15 @@ const AvailableDeliveriesScreen = ({navigation}) => {
 
     const [fetchError, setFetchError] = useState(false);
     const [deliveries, setDeliveries] = useState([]);
-    const [hasDeliveries, setNoDeliveries] = useState(false);
+    const [hasDeliveries, setHasDeliveries] = useState(true);
     
-    // change to requested and in-progress only
+
+    // temporary fix for development, remove in production
+    const process = {env: {REACT_APP_API_URL: "http://localhost:8080/api"}}
+
     useEffect(()=>{
         fetch(
-            `http://localhost:8080/api/purchases/requestedPurchase`,
+            `${process.env.REACT_APP_API_URL}/purchases/requestedPurchase`,
             {
                 headers: {'Access-Control-Allow-Origin': '*'}
             }
@@ -20,9 +23,8 @@ const AvailableDeliveriesScreen = ({navigation}) => {
         .then(response => response.json())
         .then(data => {
             setDeliveries(data)
-            setNoDeliveries(data.length)
             if (hasDeliveries!==0){
-              setNoDeliveries(true);
+              setHasDeliveries(false);
             }
         })
         .catch((reason) => {
@@ -39,7 +41,15 @@ const AvailableDeliveriesScreen = ({navigation}) => {
         <Text style={styles.title}>Available Deliveries</Text>
         
         <View style={styles.list}>
-          <DeliveryList items={deliveries} />
+          {
+            fetchError ?
+            <Text>An error ocurred fetching data</Text>
+            :
+            deliveries.length == 0 ?
+            <Text>Fetching deliveries...</Text>
+            :
+            <DeliveryList items={deliveries} />
+          }
         </View>
         
       </View>
