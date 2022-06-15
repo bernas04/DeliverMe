@@ -2,7 +2,9 @@ package com.deliverMe.tqs.services;
 
 import java.util.List;
 
+import com.deliverMe.tqs.model.Purchase;
 import com.deliverMe.tqs.model.Rider;
+import com.deliverMe.tqs.repository.PurchaseRepository;
 import com.deliverMe.tqs.repository.RiderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ public class RiderService {
     
     @Autowired
     private RiderRepository repository;
+
+    @Autowired
+    private PurchaseRepository purchaseRepository;
 
     public Rider saveRider(Rider r){
         return repository.save(r);
@@ -30,4 +35,5 @@ public class RiderService {
         repository.deleteById(id);
         return "Rider deleted!";
     }
+
 }

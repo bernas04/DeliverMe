@@ -98,4 +98,9 @@ public class PurchaseService {
         }
         return inProgressPurchases;
     }
+
+    public List<Purchase> findAllByRider(Long id){
+        Rider r = riderRepository.findById(id).get();
+        return repository.findAllByRider(r);
+    }
 }

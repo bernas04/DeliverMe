@@ -73,4 +73,9 @@ public class PurchaseController {
     public List<Purchase> getInProgressPurchases(){
         return service.getInProgressPurchase();
     }
+
+    @GetMapping("/byRider")
+    public List<Purchase> getPurchasesByRider(@RequestParam(value = "riderId") Long id){
+        return service.findAllByRider(id);
+    }
 }
