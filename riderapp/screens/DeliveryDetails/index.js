@@ -4,7 +4,6 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 const DeliveryDetailsScreen = ({ route, navigation }) => {
     const { deliveryId } = route.params;
 
-    console.log(deliveryId);
 
     const [riderID, setPostId] = useState(1);
 

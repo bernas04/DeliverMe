@@ -7,6 +7,7 @@ const AvailableDeliveriesScreen = ({navigation}) => {
 
     const [fetchError, setFetchError] = useState(false);
     const [deliveries, setDeliveries] = useState([]);
+    const [hasDeliveries, setNoDeliveries] = useState(false);
     
     // change to requested and in-progress only
     useEffect(()=>{
@@ -19,7 +20,10 @@ const AvailableDeliveriesScreen = ({navigation}) => {
         .then(response => response.json())
         .then(data => {
             setDeliveries(data)
-            console.log(data)
+            setNoDeliveries(data.length)
+            if (hasDeliveries!==0){
+              setNoDeliveries(true);
+            }
         })
         .catch((reason) => {
             console.log(reason)
@@ -29,6 +33,8 @@ const AvailableDeliveriesScreen = ({navigation}) => {
     
     
     return(
+      hasDeliveries?
+      <>
       <View style={styles.container}>
         <Text style={styles.title}>Available Deliveries</Text>
         
@@ -37,6 +43,13 @@ const AvailableDeliveriesScreen = ({navigation}) => {
         </View>
         
       </View>
+      </>
+      :
+      <>
+        <View style={styles.container}>
+          <Text style={styles.title}>No Available Deliveries</Text>
+        </View>
+      </>
     )
 };
 
