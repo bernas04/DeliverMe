@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -18,6 +20,7 @@ public class Rider extends Person{
     private int totalReviews;
 
     @OneToMany
+    @JsonIgnore
     private List<Purchase> purchases;
 
 

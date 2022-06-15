@@ -51,8 +51,8 @@ public class PurchaseController {
     }
     
     @PutMapping("/deliverPurchase")
-    public Purchase deliveredPurchase(@RequestParam(value = "id") Long id, @RequestParam(value = "rate") int rate){
-        return service.updatePurchaseDelivered(id, rate);
+    public Purchase deliveredPurchase(@RequestParam(value = "id") Long id){
+        return service.updatePurchaseDelivered(id);
     }
 
     @GetMapping("/requestedPurchase")

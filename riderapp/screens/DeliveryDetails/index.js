@@ -53,6 +53,27 @@ const DeliveryDetailsScreen = ({ route, navigation }) => {
         )
       })
     }
+
+    const deliverOrder = () =>{
+      const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+      };
+
+      fetch(`${process.env.REACT_APP_API_URL}/purchases/deliverPurchase?id=${deliveryId}`, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        fetchDeliveryData()
+      })
+      .catch((reason) => {
+        console.log(reason)
+        setProcessing(false)
+        Alert.alert(
+          "Operation failed"
+        )
+      })
+
+    }
   
     return(
       fetchError ?
@@ -82,7 +103,7 @@ const DeliveryDetailsScreen = ({ route, navigation }) => {
           item.rider == null ?
           <Button style={styles.button} title='Accept' onPress={acceptOrder} disabled={processing} />
           :
-          <Button style={styles.button} title='Complete Delivery' onPress={()=>{}} disabled={processing} />
+          <Button style={styles.button} title='Complete Delivery' onPress={deliverOrder} disabled={processing} />
         }
       </View>
     )

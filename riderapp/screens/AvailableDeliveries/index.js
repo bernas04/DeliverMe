@@ -23,7 +23,7 @@ const AvailableDeliveriesScreen = ({navigation}) => {
         .then(response => response.json())
         .then(data => {
             setDeliveries(data)
-            if (hasDeliveries!==0){
+            if (hasDeliveries===0){
               setHasDeliveries(false);
             }
         })

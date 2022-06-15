@@ -52,9 +52,9 @@ public class PurchaseService {
         return p;
     }
 
-    public Purchase updatePurchaseDelivered(Long id, int rate){
+    public Purchase updatePurchaseDelivered(Long id){
         Purchase p = repository.getReferenceById(id);
-        p.setRiderReview(rate);
+        p.setOrderCompleted();
         repository.save(p);
         return p;
     }

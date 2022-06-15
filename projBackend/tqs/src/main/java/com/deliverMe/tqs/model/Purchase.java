@@ -67,14 +67,9 @@ public class Purchase {
         System.out.println(this);
     }
 
-    public void setStatusDelivered(int rate){
+    public void setStatusDelivered(){
         this.status=OrderStatus.DELIVERED;
-        
-
-        if (rate <=5 && rate>=0){
-            
-            this.riderReview = rate;
-        }
+        this.rider.addOnePurchase(this);
     }
 
 
@@ -120,11 +115,12 @@ public class Purchase {
         return this.riderReview;
     }
 
-    public void setRiderReview(int riderReview) {
+    public void setOrderCompleted() {
         this.status=OrderStatus.DELIVERED;
-        this.riderReview = riderReview;
         this.rider.addOnePurchase(this);
     }
+
+
 
 
     public OrderStatus getStatus() {
