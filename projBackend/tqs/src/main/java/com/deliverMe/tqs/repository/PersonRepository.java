@@ -9,5 +9,5 @@ import com.deliverMe.tqs.model.Person;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long>{
-    Optional<Person> findByEmail(String email);
+    Optional<Person> findByUsername(String username);
 }
