@@ -23,9 +23,8 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private Store store;
 
-    @OneToOne(mappedBy = "address")
-    @JsonIgnore
-    private Purchase purchase;
+    //@OneToOne(mappedBy = "address")
+    //private Purchase purchase;
 
 
     public Address(String road, String city, String country, String zipcode) {

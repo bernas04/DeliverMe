@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import CourierCard from './Components/CourierCard'
 
 const Couriers = () => {
 
-    const testItems = [
-        {
-            "id": 100,
-            "name": "Dee Liverman",
-        },
-        {
-            "id": 101,
-            "name": "Will Packer",
-        },
-        {
-            "id": 102,
-            "name": "Susan Rider",
-        },
-    ]
+    const [fetchError, setFetchError] = useState(false);
+    const [riders, setRiders] = useState([]);
+
+    useEffect(()=>{
+        fetch(
+            `${process.env.REACT_APP_API_URL}/riders/Riders`,
+            {
+                headers: {'Access-Control-Allow-Origin': '*'}
+            }
+        )
+        .then(response => response.json())
+        .then(data => {
+            setRiders(data)
+        })
+        .catch((reason) => {
+            console.log(reason)
+            setFetchError(true)
+        })
+    }, [])
 
 
     return(
@@ -33,10 +38,11 @@ const Couriers = () => {
                 <Button className="me-2">Reset</Button>
                 <Button>Search</Button>
             </div>
-
-
             {
-                testItems.map(item => <CourierCard key={item.id} courierDetails={item} />)
+                fetchError ? 
+                <h3>An error ocorred while fetching data</h3>
+                :
+                riders.map(item => <CourierCard key={item.id} courierDetails={item} />)
             }
 
         </Container>

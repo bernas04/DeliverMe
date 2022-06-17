@@ -10,6 +10,7 @@ import com.deliverMe.tqs.repository.ManagerRepository;
 import com.deliverMe.tqs.repository.RiderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +18,9 @@ public class ManagerService {
     
     @Autowired
     public RiderRepository repository;
+
+    @Autowired
+    private PasswordEncoder bcryptEncoder;
 
     @Autowired
     public ManagerRepository managerRepository;
@@ -35,6 +39,7 @@ public class ManagerService {
     }
 
     public Manager saveManager(Manager m){
+        m.setPassword(bcryptEncoder.encode(m.getPassword()));
         return managerRepository.save(m);
     }
 

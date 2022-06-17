@@ -2,6 +2,7 @@ package com.deliverMe.tqs.controller;
 
 import java.util.List;
 
+import com.deliverMe.tqs.model.Purchase;
 import com.deliverMe.tqs.model.Rider;
 import com.deliverMe.tqs.services.RiderService;
 
@@ -43,5 +44,6 @@ public class RiderController {
     public String deleteRider(@RequestParam (value = "id") Long id){
         return service.deleteById(id);
     }
+
 
 }

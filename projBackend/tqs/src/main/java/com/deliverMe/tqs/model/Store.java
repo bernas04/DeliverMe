@@ -103,4 +103,18 @@ public class Store {
     }
 
 
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            ", purchases='" + getPurchases() + "'" +
+            ", address='" + getAddress() + "'" +
+            ", latitude='" + getLatitude() + "'" +
+            ", longitude='" + getLongitude() + "'" +
+            "}";
+    }
+
+
+
 }

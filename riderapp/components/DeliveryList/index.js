@@ -4,15 +4,16 @@ import { StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
 const DeliveryList = ({ items }) => {
 
     const navigation = useNavigation();
-
     const renderItem = ({item}) => {
-
         const pressHandler = () =>
+
             navigation.navigate("Delivery", { deliveryId: item.id });
 
         return(
             <TouchableOpacity onPress={pressHandler} style={styles.item} >
-                <Text style={{color: "#fff"}}>{item.name}</Text>
+                <Text style={{color: "#fff", fontSize: 20}}><strong>{item.client}</strong></Text>
+                <br></br>
+                <Text style={{color: "#fff"}}>From {item.store.address.road}, {item.store.address.city} to {item.address.road}, {item.address.city}</Text>
             </TouchableOpacity>
         )
     };

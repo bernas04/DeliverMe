@@ -1,10 +1,13 @@
 package com.deliverMe.tqs.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -17,29 +20,24 @@ public class Rider extends Person{
     private int totalReviews;
 
     @OneToMany
+    @JsonIgnore
     private List<Purchase> purchases;
 
 
-    public Rider(String name, String birthDate, String email) {
-        super(name, birthDate, email);
+    public Rider(String name, String password ,String birthDate, String username) {
+        super(name, password ,birthDate, username);
         this.averageReview = 0.0;
         this.totalReviews = 0;
+        purchases=new ArrayList<>();
     }
 
 
     public Rider(){}
 
-    /* public void completeOrder(int rate){
-        Double allRatesSum = (double)this.totalReviews*this.averageReview;
-        allRatesSum+=rate;
-        this.totalReviews++;
-        this.averageReview=allRatesSum/this.totalReviews;
-    } */
 
     public void updateAverageAndTotalOrders(int rate){
         this.averageReview = (this.averageReview*(double) this.totalReviews + rate)/++this.totalReviews;
     }
-
 
     @Override
     public String toString() {
@@ -68,6 +66,10 @@ public class Rider extends Person{
 
     public void setPurchases(List<Purchase> purchases) {
         this.purchases = purchases;
+    }
+
+    public void addOnePurchase(Purchase p){
+        purchases.add(p);
     }
 
 

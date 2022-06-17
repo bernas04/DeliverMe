@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 @Data
 @Entity
@@ -16,18 +18,25 @@ public abstract class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String name, password;
+    private String name;
+
+    
+    private String password;
+
 
     private String birthDate;
 
+    private String token;
+
     @Column(unique = true)
-    private String email;
+    private String username;
 
 
-    public Person(String name, String birthDate, String email) {
+    public Person(String name, String password ,String birthDate, String username) {
         this.name = name;
         this.birthDate = birthDate;
-        this.email = email;
+        this.username = username;
+        this.password = password;
     }
 
 
@@ -43,8 +52,13 @@ public abstract class Person {
         return this.name;
     }
 
+    public String getToken(){return this.token;}
+
     public void setName(String name) {
         this.name = name;
+    }
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getPassword() {
@@ -60,27 +74,35 @@ public abstract class Person {
         this.birthDate = birthDate;
     }
 
-    public String getEmail() {
-        return this.email;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getUsername() {
+        return this.username;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 
     public void setPassword(String password){
         this.password=password;
     }
+
 
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
             ", name='" + getName() + "'" +
+            ", password='" + getPassword() + "'" +
             ", birthDate='" + getBirthDate() + "'" +
-            ", email='" + getEmail() + "'" +
+            ", email='" + getUsername() + "'" +
             "}";
     }
+    
 
 
 }

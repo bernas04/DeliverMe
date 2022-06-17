@@ -63,7 +63,7 @@ const DeliveryDetails = () => {
                 <h3>An error ocorred while fetching data</h3>
                 :
                 <>
-                    <h2 className="mt-3">Delivery #{item.id}: From <strong>{item.store.address.road}</strong> to <strong>{item.client.address.road}</strong></h2>
+                    <h2 className="mt-3">Delivery #{item.id}: From <strong>{item.store.address.road}</strong> to <strong>{item.address.road}</strong></h2>
                     <h3 className="mb-3">Status: <span className={`h3 badge ${getStatusClass(item.status)}`}>{item.status}</span></h3>
 
                     <Row className="mb-4">
@@ -74,8 +74,8 @@ const DeliveryDetails = () => {
                         </Col>
                         <Col md="6">
                             <h3>Destination</h3>
-                            <p className="fs-4 mb-0">{item.client.address.road}, {item.client.address.city}</p>
-                            <p className="fs-4 mb-0">Zipcode: {item.client.address.zipcode}</p>
+                            <p className="fs-4 mb-0">{item.address.road}, {item.address.city}</p>
+                            <p className="fs-4 mb-0">Zipcode: {item.address.zipcode}</p>
                         </Col>
                     </Row>
 
@@ -87,7 +87,7 @@ const DeliveryDetails = () => {
                         <dd>{item.store.name}</dd>
 
                         <dt>Client:</dt>
-                        <dd>{item.client.name}</dd>
+                        <dd>{item.client}</dd>
                     </dl>
                 </>
             }

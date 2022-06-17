@@ -1,11 +1,14 @@
 package com.deliverMe.tqs.services;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.deliverMe.tqs.model.OrderStatus;
 import com.deliverMe.tqs.model.Purchase;
+import com.deliverMe.tqs.model.Rider;
 import com.deliverMe.tqs.repository.PurchaseRepository;
+import com.deliverMe.tqs.repository.RiderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +19,16 @@ public class PurchaseService {
     @Autowired
     private PurchaseRepository repository;
 
+    @Autowired
+    private RiderRepository riderRepository;
+
     public Purchase addPurchase(Purchase p){
         return repository.save(p);
     }
 
     public List<Purchase> getAllPurchases(){
-        return repository.findAll();
+        List<Purchase> all = repository.findAll(); 
+        return all;
     }
 
     public Purchase getPurchaseId(Long id){
@@ -31,18 +38,24 @@ public class PurchaseService {
     public Purchase updatePurchaseCanceled(Long id){
         Purchase p = repository.getReferenceById(id);
         p.setStatusCanceled();
+        repository.save(p);
         return p;
     }
 
-    public Purchase updatePurchaseInProgress(Long id){
+    public Purchase updatePurchaseInProgress(Long id, Long RiderId){
         Purchase p = repository.getReferenceById(id);
-        p.setStatusInProgress();
+        Rider r = riderRepository.findById(RiderId).get();
+
+        p.setStatusInProgress(r);
+
+        repository.save(p);
         return p;
     }
 
-    public Purchase updatePurchaseDelivered(Long id, int rate){
+    public Purchase updatePurchaseDelivered(Long id){
         Purchase p = repository.getReferenceById(id);
-        p.setStatusDelivered(rate);
+        p.setOrderCompleted();
+        repository.save(p);
         return p;
     }
 
@@ -84,5 +97,10 @@ public class PurchaseService {
             }
         }
         return inProgressPurchases;
+    }
+
+    public List<Purchase> findAllByRider(Long id){
+        Rider r = riderRepository.findById(id).get();
+        return repository.findAllByRider(r);
     }
 }

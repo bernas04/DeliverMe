@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RiderRepository extends JpaRepository<Rider, Long> {
-    Optional<Rider> findByEmail(String email);
+    Optional<Rider> findByUsername(String username);
 }

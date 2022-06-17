@@ -2,7 +2,10 @@ package com.deliverMe.tqs.services;
 
 import java.util.List;
 
+import com.deliverMe.tqs.model.Person;
+import com.deliverMe.tqs.model.Purchase;
 import com.deliverMe.tqs.model.Rider;
+import com.deliverMe.tqs.repository.PurchaseRepository;
 import com.deliverMe.tqs.repository.RiderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +19,14 @@ public class RiderService {
     private RiderRepository repository;
 
     @Autowired
-    private PasswordEncoder encoder;
+    private PasswordEncoder bcryptEncoder;
 
+    @Autowired
+    private PurchaseRepository purchaseRepository;
 
-    public Rider saveRider(Rider r) throws Error{
-        if (repository.findByEmail(r.getEmail()).isEmpty()){
-            r.setPassword(encoder.encode(r.getPassword()));
-        }
+    public Rider saveRider(Rider r){
+        r.setPassword(bcryptEncoder.encode(r.getPassword()));
+
         return repository.save(r);
 
     }
@@ -39,4 +43,5 @@ public class RiderService {
         repository.deleteById(id);
         return "Rider deleted!";
     }
+
 }

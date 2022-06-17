@@ -12,10 +12,13 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Data
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Purchase {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
@@ -42,11 +45,17 @@ public class Purchase {
     private OrderStatus status;
 
 
+
+
+
+    // em vez de passar o objeto store, passasr um id que depois mapeia com 
+    // o business específico
     public Purchase(Store store, String client, Address address) {
-        this.date = new Date();
         this.store = store;
         this.client = client;
         this.address=address;
+        
+        this.date = new Date();
         this.status = OrderStatus.REQUESTED;
     }
 
@@ -57,18 +66,15 @@ public class Purchase {
         this.status=OrderStatus.CANCELED;
     }
 
-    public void setStatusInProgress(){
+    public void setStatusInProgress(Rider r){
+        this.rider= r;
         this.status=OrderStatus.IN_PROGRESS;
+        System.out.println(this);
     }
 
-    public void setStatusDelivered(int rate){
+    public void setStatusDelivered(){
         this.status=OrderStatus.DELIVERED;
-        
-
-        if (rate <=5 && rate>=0){
-            this.riderReview=rate;
-            this.rider.updateAverageAndTotalOrders(rate);
-        }
+        this.rider.addOnePurchase(this);
     }
 
 
@@ -114,10 +120,12 @@ public class Purchase {
         return this.riderReview;
     }
 
-    public void setRiderReview(int riderReview) {
+    public void setOrderCompleted() {
         this.status=OrderStatus.DELIVERED;
-        this.riderReview = riderReview;
+        this.rider.addOnePurchase(this);
     }
+
+
 
 
     public OrderStatus getStatus() {
@@ -127,5 +135,25 @@ public class Purchase {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
+
+    public Address getAddress(){
+        return this.address;
+    }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", date='" + getDate() + "'" +
+            ", rider='" + getRider() + "'" +
+            ", store='" + getStore() + "'" +
+            ", client='" + getClient() + "'" +
+            ", address='" + getAddress() + "'" +
+            ", riderReview='" + getRiderReview() + "'" +
+            ", status='" + getStatus() + "'" +
+            "}";
+    }
+
 
 }
