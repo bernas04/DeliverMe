@@ -101,6 +101,14 @@ public class PurchaseService {
 
     public List<Purchase> findAllByRider(Long id){
         Rider r = riderRepository.findById(id).get();
-        return repository.findAllByRider(r);
+        List<Purchase> allPurchases= repository.findAllByRider(r);
+        List<Purchase> onGoingDeliveries = new ArrayList<>();
+
+        for (Purchase p : allPurchases){
+            if (p.getStatus().equals(OrderStatus.IN_PROGRESS)){
+                onGoingDeliveries.add(p);
+            }
+        }
+        return onGoingDeliveries;
     }
 }
