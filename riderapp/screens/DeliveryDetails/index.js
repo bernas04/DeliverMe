@@ -103,7 +103,12 @@ const DeliveryDetailsScreen = ({ route, navigation }) => {
           item.rider == null ?
           <Button style={styles.button} title='Accept' onPress={acceptOrder} disabled={processing} />
           :
-          <Button style={styles.button} title='Complete Delivery' onPress={deliverOrder} disabled={processing} />
+          <Button
+            style={styles.button}
+            title={item.status == "DELIVERED" ? 'Delivered' : 'Complete Delivery'}
+            onPress={deliverOrder}
+            disabled={processing || item.status == "DELIVERED"} 
+          />
         }
       </View>
     )
