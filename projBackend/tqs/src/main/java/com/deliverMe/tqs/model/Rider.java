@@ -26,6 +26,7 @@ public class Rider extends Person{
         this.totalReviews = 0;
     }
 
+
     public Rider(){}
 
     /* public void completeOrder(int rate){
@@ -34,6 +35,10 @@ public class Rider extends Person{
         this.totalReviews++;
         this.averageReview=allRatesSum/this.totalReviews;
     } */
+
+    public void updateAverageAndTotalOrders(int rate){
+        this.averageReview = (this.averageReview*(double) this.totalReviews + rate)/++this.totalReviews;
+    }
 
 
     @Override
@@ -64,5 +69,6 @@ public class Rider extends Person{
     public void setPurchases(List<Purchase> purchases) {
         this.purchases = purchases;
     }
+
 
 }
