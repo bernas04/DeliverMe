@@ -46,9 +46,9 @@ public class PersonRepositoryTest {
 
     @Test
     public void savePersonAndThenGetIt(){
-        Person p1 = new Rider("Zé", "1998-07-14", "ze@ua.pt");
-        Person p2 = new Rider("Maria", "2000-07-14", "maria@ua.pt");
-        Person p3 = new Rider("Antonio", "2001-07-14", "antonio@ua.pt");
+        Person p1 = new Rider("Zé", "admin","1998-07-14", "ze@ua.pt");
+        Person p2 = new Rider("Maria","admin" ,"2000-07-14", "maria@ua.pt");
+        Person p3 = new Rider("Antonio", "admin","2001-07-14", "antonio@ua.pt");
 
         manager.persistAndFlush(p1);
         manager.persistAndFlush(p2);
@@ -71,7 +71,7 @@ public class PersonRepositoryTest {
 
     @Test
     public void findById(){
-        Person p1 = new Rider("Zé", "1998-07-14", "ze@ua.pt");
+        Person p1 = new Rider("Zé", "admin","1998-07-14", "ze@ua.pt");
         manager.persistAndFlush(p1);
 
         Optional<Person> person = repository.findById(p1.getId());
@@ -84,7 +84,7 @@ public class PersonRepositoryTest {
     
     @Test
     public void findByInvalidId(){
-        Person p1 = new Rider("Zé", "1998-07-14", "ze@ua.pt");
+        Person p1 = new Rider("Zé","admin" ,"1998-07-14", "ze@ua.pt");
         manager.persistAndFlush(p1);
 
         Optional<Person> person = repository.findById(-1L);
@@ -94,10 +94,10 @@ public class PersonRepositoryTest {
 
     @Test
     public void findByEmail(){
-        Person p1 = new Rider("Zé", "1998-07-14", "ze@ua.pt");
+        Person p1 = new Rider("Zé", "admin","1998-07-14", "ze@ua.pt");
         manager.persistAndFlush(p1);
 
-        Optional<Person> person = repository.findByEmail(p1.getEmail());
+        Optional<Person> person = repository.findByUsername(p1.getUsername());
         assertThat(person).isPresent().isNotNull();
 
         assertThat(person.get()).isEqualTo(p1);
@@ -105,10 +105,10 @@ public class PersonRepositoryTest {
 
     @Test
     public void findByInvalidEmail(){
-        Person p1 = new Rider("Zé", "1998-07-14", "ze@ua.pt");
+        Person p1 = new Rider("Zé","username" ,"1998-07-14", "ze@ua.pt");
         manager.persistAndFlush(p1);
 
-        Optional<Person> person = repository.findByEmail(p1.getEmail()+"p");
+        Optional<Person> person = repository.findByUsername(p1.getUsername()+"p");
         assertThat(person).isNotPresent().isNotNull();
     }
 

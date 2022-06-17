@@ -49,10 +49,10 @@ public class RiderRepositoryTest {
 
     @Test
     public void addVariousRidersAndGetInfoAboutThem(){
-        Rider r1 = new Rider("João", "2000-04-12", "joao@ua.pt");
-        Rider r2 = new Rider("Maria", "1999-01-18", "maria@ua.pt");
-        Rider r3 = new Rider("António", "1998-04-28", "antonio@ua.pt");
-        Rider r4 = new Rider("Matilde", "2000-05-20", "matilde@ua.pt");
+        Rider r1 = new Rider("João", "admin","2000-04-12", "joao@ua.pt");
+        Rider r2 = new Rider("Maria", "admin","1999-01-18", "maria@ua.pt");
+        Rider r3 = new Rider("António", "admin","1998-04-28", "antonio@ua.pt");
+        Rider r4 = new Rider("Matilde", "admin","2000-05-20", "matilde@ua.pt");
 
         manager.persistAndFlush(r1);
         manager.persistAndFlush(r2);
@@ -66,31 +66,31 @@ public class RiderRepositoryTest {
         allRiders.remove(0);
         allRiders.remove(0);
 
-        assertThat(allRiders).extracting(Rider::getEmail).containsOnly(r4.getEmail());
+        assertThat(allRiders).extracting(Rider::getUsername).containsOnly(r4.getUsername());
     }
 
     @Test
     public void findByEmail(){
-        Rider r = new Rider("Rui", "1999-05-18", "rui@ua.pt");
+        Rider r = new Rider("Rui", "admin","1999-05-18", "rui@ua.pt");
         manager.persistAndFlush(r);
 
-        Optional<Rider> returnFromRepository = repository.findByEmail(r.getEmail());
+        Optional<Rider> returnFromRepository = repository.findByUsername(r.getUsername());
         assertEquals(r.getName(), returnFromRepository.get().getName());
     }
 
     @Test
     public void findByInvalidEmail(){
-        Rider r = new Rider("Tomás", "1998-09-19", "tomas@ua.pt");
+        Rider r = new Rider("Tomás", "admin","1998-09-19", "tomas@ua.pt");
         manager.persistAndFlush(r);
 
-        Optional<Rider> fromRepo = repository.findByEmail(r.getEmail()+"t");
+        Optional<Rider> fromRepo = repository.findByUsername(r.getUsername()+"t");
         
         assertThat(fromRepo).isEmpty().isNotPresent();
     }
 
     @Test
     public void findByInvalidId(){
-        Rider r = new Rider("Tomás", "1998-09-19", "tomas@ua.pt");
+        Rider r = new Rider("Tomás", "admin","1998-09-19", "tomas@ua.pt");
         manager.persistAndFlush(r);
 
         Optional<Rider> fromRepo = repository.findById(1000L);

@@ -16,7 +16,7 @@ public class PurchaseTest {
     @BeforeEach
     public void setUp(){
         Purchase p = new Purchase();
-        Rider r = new Rider("José", "2000-04-21", "jose@ua.pt");
+        Rider r = new Rider("José", "2000-04-21", "jose@ua.pt", "ze");
         Store s = new Store();
 
         s.setName("Loja das meias");
@@ -38,7 +38,8 @@ public class PurchaseTest {
     @Test
     @DisplayName("Test in progress Orders")
     public void testInProgressOrders(){
-        this.listPurchases.get(0).setStatusInProgress();
+        Rider r = new Rider("José", "2000-04-21", "jose@ua.pt", "ze");
+        this.listPurchases.get(0).setStatusInProgress(r);
         assertEquals(this.listPurchases.get(0).getStatus(), OrderStatus.IN_PROGRESS);
     }
 

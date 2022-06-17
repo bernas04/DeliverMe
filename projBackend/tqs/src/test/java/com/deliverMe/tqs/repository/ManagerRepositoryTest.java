@@ -50,7 +50,7 @@ public class ManagerRepositoryTest {
 
     @Test
     public void getManagerInfo(){
-        Manager m= new Manager("Bernas", "2001-04-29", "email@ua.pt");
+        Manager m= new Manager("Bernas","admin" ,"2001-04-29", "email@ua.pt");
         
         entityManager.persistAndFlush(m);
 
@@ -60,7 +60,7 @@ public class ManagerRepositoryTest {
 
     @Test
     public void findByInvalidId(){
-        Manager m= new Manager("Bernas", "2001-04-29", "email@ua.pt");
+        Manager m= new Manager("Bernas", "admin" ,"2001-04-29", "email@ua.pt");
         entityManager.persistAndFlush(m);
         Optional<Manager> repoManager = repository.findById(m.getId()+100L);
         assertThat(repoManager).isEmpty().isNotPresent();

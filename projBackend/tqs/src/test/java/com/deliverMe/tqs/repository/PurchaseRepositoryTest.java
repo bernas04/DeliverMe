@@ -93,7 +93,7 @@ public class PurchaseRepositoryTest {
         Address a = new Address("Rua Central", "Aveiro", "Portugal", "3800");
         Store s = new Store("Loja das Meias", a, 80.0, 10.0);
         Purchase p = new Purchase(s, "Maria", a);
-        Rider r = new Rider("Zé", "29-04-2001", "ze@ua.pt");
+        Rider r = new Rider("Zé", "admin","29-04-2001", "ze@ua.pt");
 
 
         manager.persist(a);
@@ -108,7 +108,7 @@ public class PurchaseRepositoryTest {
         assertThat(purchaseFromRepository).contains(p);
         assertEquals(purchaseFromRepository.get().getStatus(), OrderStatus.IN_PROGRESS);
 
-        purchaseFromRepository.get().setRiderReview(4);
+        purchaseFromRepository.get().setStatusDelivered();
         assertEquals(purchaseFromRepository.get().getStatus(), OrderStatus.DELIVERED);
 
     }
