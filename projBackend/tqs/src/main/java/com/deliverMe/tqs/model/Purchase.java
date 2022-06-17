@@ -45,6 +45,11 @@ public class Purchase {
     private OrderStatus status;
 
 
+
+
+
+    // em vez de passar o objeto store, passasr um id que depois mapeia com 
+    // o business específico
     public Purchase(Store store, String client, Address address) {
         this.store = store;
         this.client = client;

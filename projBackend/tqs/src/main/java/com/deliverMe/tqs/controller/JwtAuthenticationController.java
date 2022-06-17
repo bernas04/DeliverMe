@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.deliverMe.tqs.configuration.JwtTokenUtil;
 import com.deliverMe.tqs.model.JwtRequest;
 import com.deliverMe.tqs.model.JwtResponse;
+import com.deliverMe.tqs.model.Manager;
 import com.deliverMe.tqs.model.Person;
 import com.deliverMe.tqs.model.Rider;
 import com.deliverMe.tqs.repository.PersonRepository;
 import com.deliverMe.tqs.services.JwtUserDetailsService;
+import com.deliverMe.tqs.services.ManagerService;
 import com.deliverMe.tqs.services.RiderService;
 
 @RestController
@@ -44,6 +46,9 @@ public class JwtAuthenticationController {
 	@Autowired
 	private RiderService riderService;
 
+	@Autowired
+	private ManagerService managerService;
+
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -62,9 +67,14 @@ public class JwtAuthenticationController {
 		return ResponseEntity.ok(p);
 	}
 
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = "/registerRider", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody Rider r) throws Exception {
 		return ResponseEntity.ok(riderService.saveRider(r));
+	}
+
+	@RequestMapping(value = "/registerManager", method = RequestMethod.POST)
+	public ResponseEntity<?> saveManager(@RequestBody Manager m) throws Exception {
+		return ResponseEntity.ok(managerService.saveManager(m));
 	}
 
 	private void authenticate(String username, String password) throws Exception {
