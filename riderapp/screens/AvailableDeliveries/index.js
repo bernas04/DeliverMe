@@ -1,65 +1,62 @@
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button } from 'react-native';
 import DeliveryList from '../../components/DeliveryList';
-import React, { useEffect, useState } from "react";
+import { useFocusEffect } from '@react-navigation/native';
+
 
 
 const AvailableDeliveriesScreen = ({navigation}) => {
 
     const [fetchError, setFetchError] = useState(false);
-    const [deliveries, setDeliveries] = useState([]);
-    const [hasDeliveries, setHasDeliveries] = useState(true);
+    const [deliveries, setDeliveries] = useState(null);
     
 
     // temporary fix for development, remove in production
     const process = {env: {REACT_APP_API_URL: "http://localhost:8080/api"}}
 
-    useEffect(()=>{
+    useFocusEffect(
+      React.useCallback(() => {
+        setDeliveries(null)
         fetch(
-            `${process.env.REACT_APP_API_URL}/purchases/requestedPurchase`,
-            {
-                headers: {'Access-Control-Allow-Origin': '*'}
-            }
+          `${process.env.REACT_APP_API_URL}/purchases/requestedPurchase`,
+          {
+              headers: {'Access-Control-Allow-Origin': '*'}
+          }
         )
         .then(response => response.json())
         .then(data => {
             setDeliveries(data)
-            if (hasDeliveries===0){
-              setHasDeliveries(false);
-            }
         })
         .catch((reason) => {
             console.log(reason)
             setFetchError(true)
         })
-    }, [])
+      }, [])
+    );
     
     
     return(
-      hasDeliveries?
-      <>
-      <View style={styles.container}>
-        <Text style={styles.title}>Available Deliveries</Text>
-        
-        <View style={styles.list}>
-          {
-            fetchError ?
-            <Text>An error ocurred fetching data</Text>
-            :
-            deliveries.length == 0 ?
-            <Text>Fetching deliveries...</Text>
-            :
-            <DeliveryList items={deliveries} />
-          }
-        </View>
-        
-      </View>
-      </>
+      fetchError ?
+      <Text>An error ocurred fetching data</Text>
       :
-      <>
-        <View style={styles.container}>
+      deliveries != null ?
+      <View style={styles.container}>
+        {
+          deliveries.length == 0 ?
           <Text style={styles.title}>No Available Deliveries</Text>
-        </View>
-      </>
+          :
+          <>
+            <Text style={styles.title}>Available Deliveries</Text>
+            <View style={styles.list}>
+              <DeliveryList items={deliveries} />
+            </View>
+          </>
+        }
+      </View>
+      :
+      <View style={styles.container}>
+        <Text style={styles.title}>Fetching data...</Text>
+      </View>
     )
 };
 
