@@ -42,12 +42,4 @@ public class PurchaseTest {
         assertEquals(this.listPurchases.get(0).getStatus(), OrderStatus.IN_PROGRESS);
     }
 
-    @Test
-    @DisplayName("Test wrong deliver order")
-    public void testWrongCompleteOrder(){
-        assertEquals(this.listPurchases.get(0).getRider().getAverageReview(), 5.0);
-        this.listPurchases.get(0).setStatusDelivered(10);
-        assertEquals(this.listPurchases.get(0).getRider().getAverageReview(), 5.0);
-        assertEquals(this.listPurchases.get(0).getRider().getTotalReviews(), 1);
-    }
 }
