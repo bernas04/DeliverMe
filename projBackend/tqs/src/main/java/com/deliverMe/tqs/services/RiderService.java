@@ -26,7 +26,9 @@ public class RiderService {
 
     public Rider saveRider(Rider r){
         r.setPassword(bcryptEncoder.encode(r.getPassword()));
+
         return repository.save(r);
+
     }
 
     public List<Rider> getRiders(){

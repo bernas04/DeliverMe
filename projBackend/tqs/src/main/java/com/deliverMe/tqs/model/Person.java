@@ -39,6 +39,7 @@ public abstract class Person {
         this.password = password;
     }
 
+
     public Person(){}
 
 
@@ -83,6 +84,11 @@ public abstract class Person {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+
+    public void setPassword(String password){
+        this.password=password;
     }
 
 

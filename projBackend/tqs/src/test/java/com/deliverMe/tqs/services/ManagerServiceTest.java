@@ -1,4 +1,4 @@
-package com.deliverMe.tqs.services;
+/* package com.deliverMe.tqs.services;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -19,3 +19,4 @@ public class ManagerServiceTest {
 
     
 }
+ */

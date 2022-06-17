@@ -31,8 +31,13 @@ public class Rider extends Person{
         purchases=new ArrayList<>();
     }
 
+
     public Rider(){}
 
+
+    public void updateAverageAndTotalOrders(int rate){
+        this.averageReview = (this.averageReview*(double) this.totalReviews + rate)/++this.totalReviews;
+    }
 
     @Override
     public String toString() {
@@ -67,6 +72,5 @@ public class Rider extends Person{
         purchases.add(p);
     }
 
-    
 
 }
