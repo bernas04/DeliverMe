@@ -21,8 +21,6 @@ public class RiderService {
     @Autowired
     private PasswordEncoder bcryptEncoder;
 
-    @Autowired
-    private PurchaseRepository purchaseRepository;
 
     public Rider saveRider(Rider r){
         r.setPassword(bcryptEncoder.encode(r.getPassword()));
