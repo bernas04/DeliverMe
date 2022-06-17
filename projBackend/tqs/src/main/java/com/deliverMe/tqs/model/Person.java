@@ -39,6 +39,11 @@ public abstract class Person {
         this.password = password;
     }
 
+    public Person(String name ,String birthDate) {
+        this.name = name;
+        this.birthDate = birthDate;
+    }
+
 
     public Person(){}
 
