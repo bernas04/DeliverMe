@@ -46,8 +46,6 @@ public class ManagerServiceTest {
     @InjectMocks
     private PurchaseService purchaseService;
 
-    @Autowired
-    private TestEntityManager manager;
 
     @Test
     public void getRidersInfoWhenNoRiders(){
