@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.http.HttpHeaders;
 
 import com.deliverMe.tqs.services.StoreService;
 import com.deliverMe.tqs.configuration.JwtRequestFilter;
@@ -30,10 +31,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import static org.hamcrest.Matchers.is;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@WebMvcTest(value = ManagerController.class, excludeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = WebSecurityConfig.class)})
+@WebMvcTest(value = StoreController.class, excludeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = WebSecurityConfig.class)})
 @AutoConfigureMockMvc(addFilters = false)
 public class StoreControllerTest {
     @Autowired
@@ -60,21 +63,27 @@ public class StoreControllerTest {
         when(storeService.getStores()).thenReturn(allStores);
 
         mvc.perform(get("/api/stores/stores").contentType(MediaType.APPLICATION_JSON))
-                            .andExpect(status().isNotFound());
-                            /* .andExpect(jsonPath("$.[0].name", is("João")))
-                            .andExpect(jsonPath("$.[1].name", is("Mariana")))
-                            .andExpect(jsonPath("$.[2].name", is("Reis")))
-                            .andExpect(jsonPath("$.[3].name", is("Rodriguez"))); */
+                            .andExpect(status().isOk())
+                            .andExpect(jsonPath("$.[0].name", is("Loja das Meias")))
+                            .andExpect(jsonPath("$.[1].address.road", is("Rua Mário Sacramento")))
+                            .andExpect(jsonPath("$.[1].name", is("BookShelf")))
+                            .andExpect(jsonPath("$.[0].address.road", is("Rua da Pega")));
+
     }
 
     @Test
     public void postRider() throws Exception{
         Store r = new Store("BookSHelf", new Address("Rua Mário Sacramento", "Aveiro", "PT", "3800"));
-        
+        String exempleBody = "{\"name\":\"BookSHelf\", \"address\":{\"road\":\"Rua Mário Sacramento\", \"city\":\"Aveiro\", \"country\":\"PT\", \"zipcode\":\"3800\"}}";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
         when(storeService.saveStore(r)).thenReturn(r);
 
-        mvc.perform(post("/api/stores/addStore").contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isNotFound());
-                        /* .andExpect(jsonPath("$.", is(r))); */
+        mvc.perform(post("/api/stores/addStore").contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .headers(headers)
+                        .content(exempleBody)
+                        .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isOk());
     }
 }
