@@ -31,6 +31,13 @@ public class Rider extends Person{
         purchases=new ArrayList<>();
     }
 
+    public Rider(String name, String birthDate) {
+        super(name, birthDate);
+        this.averageReview = 0.0;
+        this.totalReviews = 0;
+        purchases=new ArrayList<>();
+    }
+
 
     public Rider(){}
 

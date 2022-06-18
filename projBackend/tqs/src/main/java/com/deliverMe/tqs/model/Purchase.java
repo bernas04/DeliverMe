@@ -120,6 +120,10 @@ public class Purchase {
         return this.riderReview;
     }
 
+    public void setReview(int review){
+        this.rider.updateAverageAndTotalOrders(review);
+    }
+
     public void setOrderCompleted() {
         this.status=OrderStatus.DELIVERED;
         this.rider.addOnePurchase(this);

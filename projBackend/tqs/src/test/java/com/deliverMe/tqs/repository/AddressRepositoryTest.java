@@ -15,7 +15,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import com.deliverMe.tqs.model.Address;
 
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 
