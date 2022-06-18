@@ -54,16 +54,13 @@ public class ManagerControllerTest {
         tmp.add(4.0);
 
         riderInfo.put(new Rider("Zé", "08-09-1999"), tmp);
-        riderInfo.put(new Rider("Joaquina", "20-08-2001"), tmp);
-        riderInfo.put(new Rider("Mário", "20-08-2000"), tmp);
-        riderInfo.put(new Rider("Filipe", "15-07-1998"), tmp);
 
 
         when(managerService.getRidersInfo()).thenReturn(riderInfo);
 
         mvc.perform(get("/api/manager/ridersInfo")
             .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                                                    .andExpect(jsonPath("$.*", hasSize(4)));
+                                                    .andExpect(jsonPath("$.*", hasSize(1)));
                                                     // Each Map<Rider, List<Double>> coresponds to 1
 
     }
