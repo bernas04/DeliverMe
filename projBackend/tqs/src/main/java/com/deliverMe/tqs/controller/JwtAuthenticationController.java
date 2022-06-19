@@ -28,7 +28,8 @@ import com.deliverMe.tqs.services.ManagerService;
 import com.deliverMe.tqs.services.RiderService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("*")
+@RequestMapping("/api/auth")
 public class JwtAuthenticationController {
 
 	@Autowired

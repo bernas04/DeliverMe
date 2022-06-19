@@ -34,7 +34,6 @@ const AvailableDeliveriesScreen = ({navigation}) => {
       }, [])
     );
     
-    
     return(
       fetchError ?
       <Text>An error ocurred fetching data</Text>
