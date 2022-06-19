@@ -7,7 +7,6 @@ const Dashboard = () => {
 
     const [fetchError, setFetchError] = useState(false);
     const [deliveries, setDeliveries] = useState([]);
-
     // change to requested and in-progress only
     useEffect(()=>{
         fetch(
@@ -18,6 +17,7 @@ const Dashboard = () => {
         )
         .then(response => response.json())
         .then(data => {
+            console.log(data)
             setDeliveries(data)
         })
         .catch((reason) => {
@@ -28,6 +28,7 @@ const Dashboard = () => {
 
 
 
+    
     return(
         <Container>
             <h2>Ongoing Deliveries</h2>

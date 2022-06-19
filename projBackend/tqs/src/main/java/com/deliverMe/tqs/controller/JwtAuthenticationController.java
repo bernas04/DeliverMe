@@ -28,7 +28,8 @@ import com.deliverMe.tqs.services.ManagerService;
 import com.deliverMe.tqs.services.RiderService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST})
+@RequestMapping("/api/auth")
 public class JwtAuthenticationController {
 
 	@Autowired
@@ -49,6 +50,7 @@ public class JwtAuthenticationController {
 	@Autowired
 	private ManagerService managerService;
 
+	
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -61,8 +63,7 @@ public class JwtAuthenticationController {
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
 		p.setToken(token);
-		
-		
+		System.out.println("skfksajd");
 
 		return ResponseEntity.ok(p);
 	}

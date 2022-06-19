@@ -10,6 +10,8 @@ const CourierDetails = () => {
     // state variables
     const [fetchError, setFetchError] = useState(false);
     const [rider, setItem] = useState(null);
+
+    const [riderPastDeliveries, setDeliveries] = useState(null);
     const [hasPastDeliveries , setPurchase] = useState(false);
 
     // fetch delivery details on load
@@ -23,20 +25,36 @@ const CourierDetails = () => {
         .then(response => response.json())
         .then(data => {
             setItem(data)
-            if (data.purchases.length!==0){
-                setPurchase=true;
-            }
         })
         .catch((reason) => {
             console.log(reason)
-            setFetchError(true)
+            //setFetchError(true)
         })
     }, [params.courierId])
 
 
+    useEffect(()=>{
+        fetch(
+            `${process.env.REACT_APP_API_URL}/purchases/allByRider?riderId=${params.courierId}`,
+            {
+                headers: {'Access-Control-Allow-Origin': '*'}
+            }
+        )
+        .then(response => response.json())
+        .then(data => {
+            setDeliveries(data)
+            if (data.length>0){
+                setPurchase(true);
+            }
+            console.log(data)
+        })
+        .catch((reason) => {
+            console.log(reason)
+            //setFetchError(true)
+        })
+    }, [params.courierId])
+   
     
-    
-
 
     return(
         <Container>
@@ -50,7 +68,7 @@ const CourierDetails = () => {
                 <h3>An error ocorred while fetching data</h3>
                 :
                 <>
-                <h2 className="mt-3">Courier #{params.courierId}: {/* rider.name */}</h2>
+                <h2 className="mt-3">Courier #{params.courierId}: {rider.name}</h2>
 
                 <dl className="fs-4">
                     <dt>Information:</dt>

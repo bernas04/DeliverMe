@@ -79,4 +79,9 @@ public class PurchaseController {
     public List<Purchase> getPurchasesByRider(@RequestParam(value = "riderId") Long id){
         return service.findAllByRider(id);
     }
+
+    @GetMapping("/allByRider")
+    public List<Purchase> getAllPurchasesByRider(@RequestParam(value = "riderId") Long id){
+        return service.findByRider(id);
+    }
 }

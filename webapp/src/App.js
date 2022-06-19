@@ -11,7 +11,7 @@ function App() {
 
   useEffect(()=>{
     if (location.pathname === "/")
-      navigate("manage");
+      navigate("login");
   })
 
   return (
