@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  deliverme_api:
+    image: 'tqs:latest'
+    build:
+      context: ./projBackend/tqs/src/main/docker
+    container_name: deliverme_api
+    depends_on:
+      - deliverme_db
+    ports:
+      - "80:8080"
+    environment:
+      - spring.datasource.url=jdbc:postgresql://deliverme_db:5432/deliverme
+      - spring.datasource.username=postgres
+      - spring.datasource.password=root
+      - spring.jpa.hibernate.ddl-auto=update
+  
+  deliverme_db:
+    image: 'postgres:13.1-alpine'
+    container_name: deliverme_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=deliverme
+    
+  deliverme_web:
+    image: 'deliverme-web'
+    build:
+      context: ./webapp
+    container_name: deliverme_web
+    ports:
+      - "90:3000"
+
