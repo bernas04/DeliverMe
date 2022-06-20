@@ -31,7 +31,7 @@ public class TqsApplication {
 		SpringApplication.run(TqsApplication.class, args);
 	}
 
-	@Transactional
+	/* @Transactional
 	@Bean
 	public CommandLineRunner demo(ManagerService managerService, PurchaseService purchaseService, RiderService riderService, StoreService storeService, AddressService addressService){
 		return(args) -> {
@@ -62,6 +62,6 @@ public class TqsApplication {
 			}		
 
 		};
-	}
+	} */
 
 }
