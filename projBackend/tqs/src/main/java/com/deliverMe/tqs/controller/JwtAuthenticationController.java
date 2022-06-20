@@ -28,7 +28,7 @@ import com.deliverMe.tqs.services.ManagerService;
 import com.deliverMe.tqs.services.RiderService;
 
 @RestController
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST})
+@CrossOrigin("*")
 @RequestMapping("/api/auth")
 public class JwtAuthenticationController {
 
