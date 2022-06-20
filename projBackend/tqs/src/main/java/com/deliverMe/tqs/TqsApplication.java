@@ -38,14 +38,14 @@ public class TqsApplication {
 			
 
 			if (riderService.getRiders().size()==0){
-				Rider r1 = new Rider("Quim", "pass","2001-02-29", "quim@ua.pt");
-				Rider r2 = new Rider("Maria", "pass","1999-12-19", "maria@ua.pt");
+				Rider r1 = new Rider("Quim", "pass","2001-02-29", "quim");
+				Rider r2 = new Rider("Maria", "pass","1999-12-19", "maria");
 				riderService.saveRider(r1);
 				riderService.saveRider(r2);
 			}
 
 			if (managerService.getManagers().size()==0){
-				Manager m = new Manager("admin", "admin","1987-12-25", "admin@ua.pt");
+				Manager m = new Manager("admin", "admin","1987-12-25", "admin");
 				managerService.saveManager(m);
 			}
 

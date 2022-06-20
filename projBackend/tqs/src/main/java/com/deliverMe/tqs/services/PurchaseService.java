@@ -1,6 +1,5 @@
 package com.deliverMe.tqs.services;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +99,19 @@ public class PurchaseService {
     }
 
     public List<Purchase> findAllByRider(Long id){
+        Rider r = riderRepository.findById(id).get();
+        List<Purchase> allPurchases= repository.findAllByRider(r);
+        List<Purchase> onGoingDeliveries = new ArrayList<>();
+
+        for (Purchase p : allPurchases){
+            if (p.getStatus().equals(OrderStatus.IN_PROGRESS)){
+                onGoingDeliveries.add(p);
+            }
+        }
+        return onGoingDeliveries;
+    }
+
+    public List<Purchase> findByRider(Long id){
         Rider r = riderRepository.findById(id).get();
         return repository.findAllByRider(r);
     }

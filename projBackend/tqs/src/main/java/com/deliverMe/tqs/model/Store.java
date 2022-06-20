@@ -84,6 +84,10 @@ public class Store {
         this.address = address;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Double getLatitude() {
         return this.latitude;
     }

@@ -50,6 +50,7 @@ public class JwtAuthenticationController {
 	@Autowired
 	private ManagerService managerService;
 
+	
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -62,8 +63,7 @@ public class JwtAuthenticationController {
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
 		p.setToken(token);
-		
-		
+		System.out.println("skfksajd");
 
 		return ResponseEntity.ok(p);
 	}
