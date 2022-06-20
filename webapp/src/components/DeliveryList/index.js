@@ -21,7 +21,7 @@ const DeliveryCard = ({deliveryDetails, link}) => {
         default:
             statusBadgeClass = "bg-secondary";
     }
-
+    console.log(deliveryDetails);
     return(
         <Card className="my-3">
             <Card.Body className="row">
@@ -35,7 +35,7 @@ const DeliveryCard = ({deliveryDetails, link}) => {
                                 Status: <span className={"badge " + statusBadgeClass}>{deliveryDetails.status}</span>
                             </Col>
                             <Col xs="3">
-                                Courier: {deliveryDetails.rider ? deliveryDetails.rider : "None"}
+                                Courier: {deliveryDetails.rider==null ? "None" : deliveryDetails.rider.name}
                             </Col>
                             <Col xs="3">
                                 Business: <strong>{deliveryDetails.store.name}</strong>
@@ -58,10 +58,9 @@ const DeliveryCard = ({deliveryDetails, link}) => {
 
 
 const DeliveryList = ({items, link}) => {
-
     return(
         <div>
-            {items.map(item => <DeliveryCard key={item.id} deliveryDetails={item} link={link} />)}
+            {items.map(item =>  <DeliveryCard key={item.id} deliveryDetails={item} link={link} />)}
         </div>
     )
 

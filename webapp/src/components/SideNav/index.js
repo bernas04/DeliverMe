@@ -3,6 +3,12 @@ import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./index.css";
 
+const handleClick = () => {
+    localStorage.clear();
+}
+
+
+
 const SideNav = () => {
 
     return(
@@ -10,6 +16,7 @@ const SideNav = () => {
             <Nav.Item><Link to="/manage">Dashboard</Link></Nav.Item>
             <Nav.Item><Link to="/deliveries">Deliveries</Link></Nav.Item>
             <Nav.Item><Link to="/couriers">Couriers</Link></Nav.Item>
+            <Nav.Item><Link id="velhice" to="/login" onClick={handleClick}>Exit</Link></Nav.Item>
         </Nav>
     );
 };

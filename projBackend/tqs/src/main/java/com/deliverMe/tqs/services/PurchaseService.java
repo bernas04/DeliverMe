@@ -110,4 +110,9 @@ public class PurchaseService {
         }
         return onGoingDeliveries;
     }
+
+    public List<Purchase> findByRider(Long id){
+        Rider r = riderRepository.findById(id).get();
+        return repository.findAllByRider(r);
+    }
 }

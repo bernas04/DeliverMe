@@ -10,3 +10,8 @@
 .side-nav a:hover {
     background-color: deepskyblue;
 }
+
+#velhice{
+    position:absolute;
+    bottom: 0;
+}
