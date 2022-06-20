@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // -- SecureStore usage:
 // -- Saving items:
@@ -157,9 +158,13 @@ const LoginScreen = () => {
         .then((response) => {
             if (response.ok) {
                 let data = response.json()
-                SecureStore.setItemAsync("current_user", JSON.stringify(data))
-                setCurrentUser(data)
-                setProcessing(false)
+                data.then((data) => {
+                        //SecureStore.setItemAsync("current_user", JSON.stringify(data))
+                        AsyncStorage.setItem("current_user", JSON.stringify(data))
+                        setCurrentUser(data)
+                        setProcessing(false)
+                    }
+                )  
             }
             else {
                 Alert.alert("Incorrect credentials")
@@ -174,7 +179,8 @@ const LoginScreen = () => {
 
     const logout = () => {
         setProcessing(true)
-        SecureStore.deleteItemAsync("current_user")
+        //SecureStore.deleteItemAsync("current_user")
+        AsyncStorage.removeItem("current_user")
         setCurrentUser(null)
         setProcessing(false)
     }
@@ -186,6 +192,9 @@ const LoginScreen = () => {
             async function getCurrentUser() {
                 //let currUser = await SecureStore.getItemAsync("current_user")
                 //setCurrentUser(JSON.parse(currUser))
+
+                let currUser = await AsyncStorage.getItem("current_user")
+                setCurrentUser(currUser ? JSON.parse(currUser) : null)
             }
             
             getCurrentUser()
@@ -194,7 +203,7 @@ const LoginScreen = () => {
 
 
     return(
-        currentUser ?
+        currentUser != null ?
         <View style={styles.container}>
             <Text style={styles.title}>Currently logged in as:</Text>
             <Text style={styles.title}>{currentUser.name}</Text>
@@ -249,7 +258,7 @@ const ProfileScreen = ({navigation}) => {
                 currScreen === "login" ?
                 <LoginScreen />
                 :
-                <RegisterScreen />
+                <RegisterScreen viewSetter={setCurrScreen} />
             }
             <Button
                 style={styles.viewSwitchButton}
