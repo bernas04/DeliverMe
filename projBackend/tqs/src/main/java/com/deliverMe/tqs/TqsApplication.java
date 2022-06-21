@@ -31,7 +31,7 @@ public class TqsApplication {
 		SpringApplication.run(TqsApplication.class, args);
 	}
 
-	/* @Transactional
+	@Transactional
 	@Bean
 	public CommandLineRunner demo(ManagerService managerService, PurchaseService purchaseService, RiderService riderService, StoreService storeService, AddressService addressService){
 		return(args) -> {
@@ -55,13 +55,9 @@ public class TqsApplication {
 	
 				addressService.saveAddress(a);
 				addressService.saveAddress(a2);
-				Store s = new Store("BookShelf", a, 90.0, 89.0);
-				storeService.saveStore(s);
-				Purchase p1 = new Purchase(s, "Maria",a2);
-				purchaseService.addPurchase(p1);
 			}		
 
 		};
-	} */
+	}
 
 }

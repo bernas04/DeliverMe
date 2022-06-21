@@ -8,8 +8,8 @@ const DeliveryDetailsScreen = ({ route, navigation }) => {
 
 
     // temporary fix for development, remove in production
-    const process = {env: {REACT_APP_API_URL: "http://localhost:8080/api"}}
-
+    const process = {env: {REACT_APP_API_URL: "http://localhost:8081/api"}}
+    
     const [item, setItem] = useState(null);
     const [fetchError, setFetchError] = useState(false)
     const [processing, setProcessing] = useState(false)
@@ -21,10 +21,12 @@ const DeliveryDetailsScreen = ({ route, navigation }) => {
       .then(response => response.json())
       .then(data => {
         setItem(data)
+        console.log("---> " ,data)
         setProcessing(false)
       })
       .catch((reason)=>{
-        console.log(reason)
+        console.log("---> " ,reason)
+
         setFetchError(true)
       })
     }
@@ -43,7 +45,7 @@ const DeliveryDetailsScreen = ({ route, navigation }) => {
         getCurrentRiderId()
       }, [])
     );
-
+      
     useEffect(()=>{
       if (riderID == null)
         return

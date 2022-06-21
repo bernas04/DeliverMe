@@ -3,11 +3,14 @@ package com.deliverMe.tqs.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.deliverMe.tqs.model.Address;
 import com.deliverMe.tqs.model.OrderStatus;
 import com.deliverMe.tqs.model.Purchase;
 import com.deliverMe.tqs.model.Rider;
+import com.deliverMe.tqs.model.Store;
 import com.deliverMe.tqs.repository.PurchaseRepository;
 import com.deliverMe.tqs.repository.RiderRepository;
+import com.deliverMe.tqs.repository.StoreRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +22,26 @@ public class PurchaseService {
     private PurchaseRepository repository;
 
     @Autowired
+    private StoreRepository storeRepository;
+
+    @Autowired
     private RiderRepository riderRepository;
 
     public Purchase addPurchase(Purchase p){
+        if (p.getStore()==null){
+            List<Store> allStores = storeRepository.findAll();
+            if (allStores.size()>0){
+                Store toAdd = allStores.get(0);
+                p.setStore(toAdd);
+                p.setStatus(OrderStatus.REQUESTED);
+            }
+            else{
+                Store tmp =storeRepository.save(new Store("BookShelf", new Address("Rua Lourenço Peixinho", "Aveiro", "Portugal", "3800")));
+                p.setStore(tmp);
+                p.setStatus(OrderStatus.REQUESTED);
+            }
+        }
+        System.out.println("--> " +p);
         return repository.save(p);
     }
 

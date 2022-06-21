@@ -2,7 +2,10 @@ package com.deliverMe.tqs.controller;
 
 import java.util.List;
 
+import com.deliverMe.tqs.model.Address;
 import com.deliverMe.tqs.model.Purchase;
+import com.deliverMe.tqs.repository.AddressRepository;
+import com.deliverMe.tqs.services.AddressService;
 import com.deliverMe.tqs.services.PurchaseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,9 @@ public class PurchaseController {
     
     @Autowired
     PurchaseService service;
+
+    @Autowired
+    AddressRepository addressService;
 
     @PostMapping("/addPurchase")
     public Purchase addPurchase(@RequestBody Purchase p){

@@ -2,6 +2,7 @@ package com.deliverMe.tqs.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class Store {
     @OneToMany
     private List<Purchase> purchases;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
     private Double latitude, longitude;

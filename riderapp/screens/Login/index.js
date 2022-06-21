@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 // temporary fix for development, remove in production
-const process = {env: {REACT_APP_API_URL: "http://localhost:8080/api"}}
+const process = {env: {REACT_APP_API_URL: "http://localhost:8081/api"}}
 
 const RegisterScreen = ({viewSetter}) => {
 

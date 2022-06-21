@@ -1,5 +1,6 @@
 package com.deliverMe.tqs.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,7 @@ public class Address {
     private String road, city, country, zipcode;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "address")
+    @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
     private Store store;
 
     //@OneToOne(mappedBy = "address")
