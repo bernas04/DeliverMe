@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Button, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const DeliveryDetailsScreen = ({ route, navigation }) => {
     const { deliveryId } = route.params;
@@ -9,9 +11,9 @@ const DeliveryDetailsScreen = ({ route, navigation }) => {
     const process = {env: {REACT_APP_API_URL: "http://localhost:8080/api"}}
 
     const [item, setItem] = useState(null);
-    const [riderID, setPostId] = useState(1);
     const [fetchError, setFetchError] = useState(false)
     const [processing, setProcessing] = useState(false)
+    const [riderID, setRiderId] = useState(null);
 
 
     const fetchDeliveryData = () => {
@@ -27,10 +29,27 @@ const DeliveryDetailsScreen = ({ route, navigation }) => {
       })
     }
 
-    useEffect(()=>{
-      fetchDeliveryData()
-    },[])
+    useFocusEffect(
+      React.useCallback(() => {
+        setDeliveries(null)
 
+        async function getCurrentRiderId() {
+          let rider = await AsyncStorage.getItem("current_user")
+          rider = rider ? JSON.parse(rider) : null
+
+          setRiderId(rider ? rider.id : null)
+        }
+
+        getCurrentRiderId()
+      }, [])
+    );
+
+    useEffect(()=>{
+      if (riderID == null)
+        return
+        
+      fetchDeliveryData()
+    }, riderID)
 
     const acceptOrder = () => {
       setProcessing(true)
