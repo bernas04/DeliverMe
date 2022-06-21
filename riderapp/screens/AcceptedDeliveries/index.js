@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import DeliveryList from '../../components/DeliveryList';
 import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const AcceptedDeliveriesScreen = ({navigation}) => {
   
     const [fetchError, setFetchError] = useState(false);
     const [deliveries, setDeliveries] = useState(null);
-    const [riderID, setPostId] = useState(1);
+    const [riderID, setRiderId] = useState(null);
     
 
     // temporary fix for development, remove in production
@@ -18,26 +19,48 @@ const AcceptedDeliveriesScreen = ({navigation}) => {
     useFocusEffect(
       React.useCallback(() => {
         setDeliveries(null)
-        fetch(
-          `${process.env.REACT_APP_API_URL}/purchases/byRider?riderId=${riderID}`,
-          {
-              headers: {'Access-Control-Allow-Origin': '*'}
-          }
-        )
-        .then(response => response.json())
-        .then(data => {
-            setDeliveries(data)
-        })
-        .catch((reason) => {
-            console.log(reason)
-            setFetchError(true)
-        })
+
+        async function getCurrentRiderId() {
+          let rider = await AsyncStorage.getItem("current_user")
+          rider = rider ? JSON.parse(rider) : null
+
+          setRiderId(rider ? rider.id : null)
+        }
+
+        getCurrentRiderId()
       }, [])
     );
 
+    useEffect(()=>{
+      if (riderID == null)
+        return
+
+      fetch(
+        `${process.env.REACT_APP_API_URL}/purchases/byRider?riderId=${riderID}`,
+        {
+            headers: {'Access-Control-Allow-Origin': '*'}
+        }
+      )
+      .then(response => response.json())
+      .then(data => {
+          setDeliveries(data)
+      })
+      .catch((reason) => {
+          console.log(reason)
+          setFetchError(true)
+      })
+    }, [riderID])
+
     return(
+      riderID == null ?
+      <View style={styles.container}>
+        <Text>Please login first</Text>
+      </View>
+      :
       fetchError ?
-      <Text>An error ocurred fetching data</Text>
+      <View style={styles.container}>
+        <Text>An error ocurred fetching data</Text>
+      </View>
       :
       deliveries != null ?
       <View style={styles.container}>

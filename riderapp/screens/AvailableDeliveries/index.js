@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button } from 'react-native';
 import DeliveryList from '../../components/DeliveryList';
 import { useFocusEffect } from '@react-navigation/native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const AvailableDeliveriesScreen = ({navigation}) => {
 
     const [fetchError, setFetchError] = useState(false);
     const [deliveries, setDeliveries] = useState(null);
+    const [riderID, setRiderId] = useState(null);
     
 
     // temporary fix for development, remove in production
@@ -17,6 +18,16 @@ const AvailableDeliveriesScreen = ({navigation}) => {
     useFocusEffect(
       React.useCallback(() => {
         setDeliveries(null)
+
+        async function getCurrentRiderId() {
+          let rider = await AsyncStorage.getItem("current_user")
+          rider = rider ? JSON.parse(rider) : null
+
+          setRiderId(rider ? rider.id : null)
+        }
+
+        getCurrentRiderId()
+
         fetch(
           `${process.env.REACT_APP_API_URL}/purchases/requestedPurchase`,
           {
@@ -35,6 +46,11 @@ const AvailableDeliveriesScreen = ({navigation}) => {
     );
     
     return(
+      riderID == null ?
+      <View style={styles.container}>
+        <Text>Please login first</Text>
+      </View>
+      :
       fetchError ?
       <Text>An error ocurred fetching data</Text>
       :
