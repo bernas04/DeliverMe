@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Button, Alert } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -33,8 +34,6 @@ const DeliveryDetailsScreen = ({ route, navigation }) => {
 
     useFocusEffect(
       React.useCallback(() => {
-        setDeliveries(null)
-
         async function getCurrentRiderId() {
           let rider = await AsyncStorage.getItem("current_user")
           rider = rider ? JSON.parse(rider) : null
