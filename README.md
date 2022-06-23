@@ -11,3 +11,8 @@ The stores can regist in this platform and start using it.
 | André Freixo | Product Owner | 98495 |
 | João Farias | Team Manager | 98679 |
 | Marta Fradique | QA Engineer | 98629 |
+
+## Login in webapp
+
+user: admin
+password: admin
